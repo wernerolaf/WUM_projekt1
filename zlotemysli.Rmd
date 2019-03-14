@@ -77,4 +77,33 @@ Liczba Bank / Natl Transakcje o wysokim wskaźniku wykorzystania / transakcje, k
 
 -7 Condition not Met (e.g. No Inquiries, No Delinquencies) 
 
-   
+
+
+#pierwsza faza projekt1u
+
+1. Dokładny opis wszystkich cech po koleii 
+2. 2. objaśnienie wartości ujemnych
+3. Opis danych, co one implikują, co może być przydatne , a co jest problematychne (
+np. nie zrównoważony dataset jest mało potrzebny, za wiele z niego nie można wycisnąć, np grupa ktora ma prawie wszedzie -8, ciekawa, ale nie jesteśmy w stanie nic z tej grupy danych wywnioskować. Zastanowić sie co z tym zrobić, przeprowadzić rozumowanie.
++Omównie czystych danych -> ok. 2 tysiące. 
+
++Analizujemy wady i zalety datesetu. Zaproponwać ewentualne rozwiązania, dla problematycznych danych.  
+
+3. Eksploracja danych !!!
+  ->każdy z nas robi eksploracje za pomocą dodakowcyh pakietów, analizujemy co warto by było przedstawić na prezentacji, 
+  eksperymentujemy, najlepiej przy okazji uwzględnić vtreat z pracy domowej i zastosować go dla naszych danych. Oczywiście warto        przetestować inne opcje jakie Mateusz prponował w mailu (po prostu eksperymentujemy xd) <- Jednak zaznaczam , że nie jest to          koonieczne na tym etapie prezentacji, jak czasu starczy to super, może znajdziemy jakiś złoty środek jak obrabiać te dane, ale 
+  tragedii nie będzie jak nie będzie tego w prezentacji.
+  
+  Proponuje zrobić jeden plik .Rmd w którym każdy będzie miał swoje miejsce i do niego będziemy wpisywać swoje eksperymenty             spostrzeżenia i na bieżąco wrzucać na gita (dzieki temu może ktoś się zainspiruje, i odkryje jeszcze lepszą zależność ) + oczywiście
+  dyskutujmy na fb czy gdzie kolwiek, na bieżąco jeżeli komuś jakiś pomysł wpadnie do głowy, coś zauważy ciekawego itd.
+  
+  Deadline burzy mózgów do końca niedzieli, w poniedziałek sklejamy nasz wspólny plik w ładną prezentacje. ;) 
+  Jak coś modyfikujcie moje powyższe wywody, może czegoś nie zrozumiałam, jak sie nie zgadzacie dajcie znać, po prostu tyle pamiętam
+  z dzisiejszej narady z Bogdanem i to napisałam. 
+  
+  
+  
+  Obróbka danych: -> jedna z propozycji, warto przetestować 
+  Logicznie analizując każdą cechę, postarać się zastąpić misusowe wartości odpowiednimi liczbami które będą wskazywały na to, czy
+  dana wartość jest na korzysść danego klienta czy nie.
+  
