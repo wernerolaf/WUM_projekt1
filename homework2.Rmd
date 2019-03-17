@@ -1,0 +1,160 @@
+---
+title: "homework2"
+author: "Joanna Gajewska"
+date: "16 March 2019"
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+```{r,echo=FALSE, include=FALSE, warning=FALSE, message=FALSE, error=FALSE}
+
+library(tidyverse)
+library(WVPlots)
+library(vtreat)
+library(ranger)
+library(rmarkdown)
+```
+
+#FICO
+
+Dane z których będę korzystać pochodzą z projektu FICO. To co sprawia trudność w ich obróbce to ujemne wartości dla niektórych cech, które oznaczają, że dane transakcje nie zostały zarejestrowane. W puli danych jest dataset osób, które nigdy nie miały otwartego rachunku, dlatego też, nic o nich nie wiadomo. Z tego powodu usunięto ich z danych.
+
+Kolejno, zastąpiono ujemne dane, na takie które odpowiadałyby sytuacji, czy brak poszczególnych operacji działa na korzyść klienta lub nie.
+
+
+```{r , echo=FALSE}
+
+heloc_dataset_v1<-read.csv(file = "heloc_dataset_v1.csv")
+heloc_no9 <- heloc_dataset_v1[heloc_dataset_v1$MSinceMostRecentTradeOpen != -9, ]
+
+a<-2*max(heloc_no9$MSinceMostRecentDelq); a
+
+heloc_no9$MSinceMostRecentDelq[heloc_no9$MSinceMostRecentDelq== -8]<-a
+heloc_no9$MSinceMostRecentDelq[heloc_no9$MSinceMostRecentDelq == -7]<-a
+
+heloc_no9$MSinceMostRecentInqexcl7days[heloc_no9$MSinceMostRecentInqexcl7days== -8]<-2*max(heloc_no9$MSinceMostRecentInqexcl7days)
+heloc_no9$MSinceMostRecentInqexcl7days[heloc_no9$MSinceMostRecentInqexcl7days== -7]<-2*max(heloc_no9$MSinceMostRecentInqexcl7days)
+
+
+heloc_no9$NetFractionRevolvingBurden[heloc_no9$NetFractionRevolvingBurden == -8]<-0
+heloc_no9$NetFractionRevolvingBurden[heloc_no9$NetFractionRevolvingBurden == -7]<-0
+hist(heloc_no9$NetFractionRevolvingBurden)
+
+heloc_no9$NetFractionInstallBurden[heloc_no9$NetFractionInstallBurden== -8]<-0
+heloc_no9$NetFractionInstallBurden[heloc_no9$NetFractionInstallBurden== -7]<-0
+hist(heloc_no9$NetFractionInstallBurden)
+
+b<-median(heloc_no9$NumRevolvingTradesWBalance)
+heloc_no9$NumRevolvingTradesWBalance[heloc_no9$NumRevolvingTradesWBalance == -8]<-b
+heloc_no9$NumRevolvingTradesWBalance[heloc_no9$NumRevolvingTradesWBalance == -7]<-b
+hist(heloc_no9$NumRevolvingTradesWBalance)
+
+c<-median(heloc_no9$NumInstallTradesWBalance)
+heloc_no9$NumInstallTradesWBalance[heloc_no9$NumInstallTradesWBalance == -8]<-c
+heloc_no9$NumInstallTradesWBalance[heloc_no9$NumInstallTradesWBalance == -7]<-c
+hist(heloc_no9$NumInstallTradesWBalance)
+
+heloc_no9$NumBank2NatlTradesWHighUtilization[heloc_no9$NumBank2NatlTradesWHighUtilization == -8]<-0
+heloc_no9$NumBank2NatlTradesWHighUtilization[heloc_no9$NumBank2NatlTradesWHighUtilization == -7]<-0
+hist(heloc_no9$NumBank2NatlTradesWHighUtilization)
+
+d<-median(heloc_no9$PercentTradesWBalance)
+heloc_no9$PercentTradesWBalance[heloc_no9$PercentTradesWBalance == -8]<-d
+heloc_no9$PercentTradesWBalance[heloc_no9$PercentTradesWBalance == -7]<-d
+hist(heloc_no9$PercentTradesWBalance)
+
+
+
+outcome <- "RiskPerformance"
+positive <- "Good"
+
+
+names <- setdiff(colnames(heloc_no9), outcome);names
+
+# Buduje funkcje do projektowania zmiennych zabiegów do przewidywania binarnego wyniku kategorycznego. 
+#dTrain-Ramka danych do nauki zabiegów (dane treningowe) musi mieć co najmniej 1 wiersz.
+#names-Nazwy kolumn, które należy traktować (zmienne efektywne).
+#outcome-Nazwa zmiennej wynikowej kolumny.
+# positive-Wartość / poziom wyniku, który ma być uznany za „sukces”,
+
+#Losuje zbiór uczącyi testowy w proporcji 70% danych - uczący
+#runif(number of observations)
+
+isTrain <- runif(nrow(heloc_no9)) <= 0.7; isTrain
+dTrain <- heloc_no9[isTrain, , drop = FALSE]
+dTest <- heloc_no9[!isTrain, , drop = FALSE]
+
+
+
+
+```
+
+
+scoreFrame - zawiera kolumny:
+
+varName: nazwa nowej zmiennej
+origName: nazwa oryginalnej zmiennej, z której pochodzi zmienna (może się powtarzać).
+code: czy w zmiennej nie ma braków (clean) lub są (isBad)
+varMoves: logiczna PRAWDA, jeśli zmienna zmieniała się podczas treningu; tylko zmienne, które się poruszają,będą brane pod uwagę
+sig: liniowe znaczenie regresji zmiennej pochodnej względem celu wskaźnika 0/1 dla celów numerycznych, inaczej znaczenie regresji logistycznej.
+rsq - można rozumieć jako wariancje, modelu od rzeczywisego wyniki 
+needsSplit: jest zmienną podmodelową i nie wymaga oceny próbki.
+
+
+```{r}
+
+
+
+cfe <- vtreat::mkCrossFrameCExperiment(dTrain, names,
+                                       outcome,positive);cfe
+
+#ramka z origName, varName,  code , rsq ,sig ,extraModelDegrees
+plan <- cfe$treatments;plan
+# get the performance statistics on the derived variables.uzyskać statystyki wydajności dla zmiennych pochodnych.
+#   varName varMoves,rsq,  sig, needsSplit, extraModelDegrees,  origName, cod
+sf <- plan$scoreFrame;sf
+
+treatedTrain <- cfe$crossFrame;treatedTrain
+
+
+
+newNames <- sf$varName;newNames
+
+f <- paste(outcome, 
+           paste(newNames,  collapse = ' + '), 
+           sep = ' ~ ');f
+
+model <- ranger(as.formula(f), 
+               probability = TRUE,
+                data = treatedTrain)
+
+```
+
+
+```{r test}
+treatedTest <- vtreat::prepare(plan, dTest, 
+                               pruneSig = NULL, 
+                               varRestriction = newNames);treatedTest
+
+#prepare-przygotowanie ramki danych do analizy. Powstała ramka będzie miała nowe efektywne zmienne, które są numeryczne i wolne od NaN / NA. Jeśli kolumna wyników jest obecna, zostanie skopiowana. Intencją jest, aby te ramki były kompatybilne z większością technik uczenia maszynowego 
+pred <- predict(model, 
+                data=treatedTest, 
+                type='response');pred
+
+
+treatedTest$pred <- pred$predictions[,positive];treatedTest$pred
+
+
+WVPlots::ROCPlot(treatedTest, 
+                 'pred', outcome, positive,
+                 'test performance')
+
+```
+
+
