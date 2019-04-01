@@ -1,0 +1,79 @@
+---
+title: "Wstęp do uczenia maszynowego - projekt nr 1"
+author: "Joanna Gajewska & Olaf Werner & Bogdan Jastrzębski"
+date: "April 2, 2019"
+output: ioslides_presentation
+---
+
+```{r setup, include=FALSE}
+# Libraries
+
+knitr::opts_chunk$set(echo = FALSE)
+library(readr)
+library(mlr)
+library(ggplot2)
+library(DALEX)
+
+# Wczytywanie datasetu
+
+# readr::read_csv("final_dataset.csv", col_types = cols(
+#   library = col_factor(),
+#   model_name = col_factor(),
+#   numberOfCategoricalFeatures = col_double(),
+#   numberOfNumericalFeatures = col_double(),
+#   meanUniqueNumericalValues = col_double(),
+#   meanUniqueCategoricalValues = col_double(),
+#   meanNumberMissing = col_double(),
+#   number_of_instances = col_double(),
+#   ACC = col_double()
+# )) -> df
+
+# Dataset preparation
+
+# df <- df[!is.na(df$meanUniqueNumericalValues), ] 
+# df <- df[!is.na(df$meanUniqueCategoricalValues), ]
+
+```
+
+## Our problem - rewind
+
+Tutaj przypominamy o naszym problemie.
+
+```{r, out.width = "500px", out.height= "360px"}
+#knitr::include_graphics("plots/na_final.png")
+```
+
+## Classifiers we explored
+
+wylistować klasyfikatory, których używamy.
+
+## Model performance - ECDF (czyli krzywe)
+
+Uwaga!!! nie umiemy jeszcze prawidłowo zinterpretować tych wykresów. 
+
+## Model performance -  Boxplots ?? / or another form of error comparison
+
+porównanie błędów
+
+ja mam jeszcze zastrzeżenia do Boxplotów.
+
+## Variable importance
+
+(może zrobić variable importance tylko dla najlepszego???)
+
+## Best variables only
+
+porównujemy błędy starych i nowego bez kolumn
+
+## Worst variables only
+
+nasz ciekawy dodatek o tym, ile informacji zostało w danych potencjalnie nieważnych. 
+
+## So long, and thanks for your attention
+
+bye bye (pięknie machamy rąsiami)
+
+
+
+
+
