@@ -1,5 +1,5 @@
 ---
-title: "Wstęp do uczenia maszynowego - projekt nr 1"
+title: "Wstęp do uczenia maszynowego-projekt nr 1"
 author: "Joanna Gajewska & Olaf Werner & Bogdan Jastrzębski"
 date: "April 2, 2019"
 output: ioslides_presentation
@@ -102,6 +102,15 @@ knitr::include_graphics("variables_lda.png")
 ```{r}
 knitr::include_graphics("ROC.png")
 ```
+
+
+##AUC
+
+```{r}
+knitr::include_graphics("AUCasia.png")
+```
+
+
 
 ## Dziękujemy za uwagę!
 
