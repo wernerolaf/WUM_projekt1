@@ -13,7 +13,8 @@ library(readr)
 library(mlr)
 library(ggplot2)
 library(DALEX)
-
+library(kableExtra)
+library(knitr)
 # Wczytywanie datasetu
 
 # readr::read_csv("final_dataset.csv", col_types = cols(
@@ -35,43 +36,78 @@ library(DALEX)
 
 ```
 
-## Our problem - rewind
+## Nasz problem
 
-Tutaj przypominamy o naszym problemie.
+Naszym problemem była ocena zdolności kredytowej klientów banku. Dane pochodzą z FICO 
 
 ```{r, out.width = "500px", out.height= "360px"}
-#knitr::include_graphics("plots/na_final.png")
+knitr::include_graphics("logo.png")
 ```
 
-## Classifiers we explored
+## Użyte modele
 
-wylistować klasyfikatory, których używamy.
+Użyliśmy następujących modeli:
 
-## Model performance - ECDF (czyli krzywe)
+* svm
+* rpart
+* Ida
+* qda
+* rf
 
-Uwaga!!! nie umiemy jeszcze prawidłowo zinterpretować tych wykresów. 
+## Krzywe dystrybucji rezyduł
 
-## Model performance -  Boxplots ?? / or another form of error comparison
+```{r out.width = "700px", out.height= "560px"}
+knitr::include_graphics("krzywa_git.png")
+```
 
-porównanie błędów
+## Boxploty
 
-ja mam jeszcze zastrzeżenia do Boxplotów.
+```{r}
+knitr::include_graphics("boxploty.png")
+```
 
-## Variable importance
 
-(może zrobić variable importance tylko dla najlepszego???)
+## Ważność zmiennych: svm
 
-## Best variables only
+```{r}
+knitr::include_graphics("variables_svm.png")
+```
 
-porównujemy błędy starych i nowego bez kolumn
+## Ważność zmiennych: rpart
 
-## Worst variables only
+```{r}
+knitr::include_graphics("variables_rpart.png")
+```
 
-nasz ciekawy dodatek o tym, ile informacji zostało w danych potencjalnie nieważnych. 
+## Ważność zmiennych: rf
 
-## So long, and thanks for your attention
+```{r}
+knitr::include_graphics("variables_rf.png")
+```
 
-bye bye (pięknie machamy rąsiami)
+## Ważność zmiennych: qda
+
+```{r}
+knitr::include_graphics("variables_qda.png")
+```
+
+## Ważność zmiennych: Ida
+
+```{r}
+knitr::include_graphics("variables_lda.png")
+```
+
+## ROC
+
+```{r}
+knitr::include_graphics("ROC.png")
+```
+
+## Dziękujemy za uwagę!
+
+Olaf Werner
+Bogdan Jastrzębski
+Joanna Gajewska
 
 
 
