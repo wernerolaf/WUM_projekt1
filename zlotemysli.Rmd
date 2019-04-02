@@ -107,3 +107,10 @@ np. nie zrównoważony dataset jest mało potrzebny, za wiele z niego nie można
   Logicznie analizując każdą cechę, postarać się zastąpić misusowe wartości odpowiednimi liczbami które będą wskazywały na to, czy
   dana wartość jest na korzysść danego klienta czy nie.
   
+  
+  
+#Druga faza
+  
+Olaf- dokończyć knn
+
+  

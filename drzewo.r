@@ -5,6 +5,8 @@ DataExplorer::plot_missing(heloc_dataset_v1)
 DataExplorer::plot_boxplot(heloc_dataset_v1, by="RiskPerformance")
 library(mlr)
 library(rpart)
+
+
 tree<-rpart(RiskPerformance~NetFractionRevolvingBurden+
               MSinceOldestTradeOpen+
               MSinceMostRecentTradeOpen+
@@ -28,7 +30,7 @@ moz<-listLearners(check.packages = TRUE)
 
 
 cv <- makeResampleDesc("CV", iters = 5)
-r <- resample(learner, task, cv,measures=list(acc))
+r <- resample(learner, task, cv,measures=list(tpr))
 MSE <- r$aggr
 
 MSE
@@ -100,6 +102,7 @@ heloc_9
 plot_boxplot(heloc_9, by="RiskPerformance")
 
 plot_correlation(heloc_9)
+
 heloc_9$RiskPerformance %>% table()
 
 plot_bar(heloc_dataset_v1)
