@@ -7,6 +7,7 @@ library(e1071)
 library(ranger)
 library(MASS)
 library(DALEX)
+library(mlr)
 heloc_dataset_v1<-read.csv(file = "heloc_dataset_v1.csv")
 
 # Czyszczenie
@@ -22,11 +23,11 @@ heloc_unclean<-heloc_no9[unclean,]
 
 # Epic knn imputation
 
-heloc_clean_knn<-heloc_clean %>% select(-MaxDelqEver,-MaxDelq2PublicRecLast12M,-RiskPerformance)
-heloc_unclean_knn<-heloc_unclean %>% select(-MaxDelqEver,-MaxDelq2PublicRecLast12M,-RiskPerformance)
+heloc_clean_knn<-heloc_clean %>% dplyr::select(-MaxDelqEver,-MaxDelq2PublicRecLast12M,-RiskPerformance)
+heloc_unclean_knn<-heloc_unclean %>% dplyr::select(-MaxDelqEver,-MaxDelq2PublicRecLast12M,-RiskPerformance)
 
 for(i in 1:nrow(heloc_unclean)) {
-  print(i)
+  #print(i)
   badcols <- which(heloc_unclean_knn[i,] %in% c(-9,-8,-7))
   k <- FNN::knn(heloc_clean_knn[-badcols], heloc_unclean_knn[i,-badcols], cl=heloc_clean[[1]] , k=5,algorithm="cover_tree")
   indices <- attr(k, "nn.index")
@@ -42,6 +43,9 @@ heloc_ok<-sample_frac(rbind(heloc_clean,heloc_unclean))
 
 heloc_ok$MaxDelqEver<-factor(heloc_ok$MaxDelqEver)
 heloc_ok$MaxDelq2PublicRecLast12M<-factor(heloc_ok$MaxDelq2PublicRecLast12M)
+
+
+heloc_ok<-read.csv("heloc_ok.csv")
 
 #
 outcome <- "RiskPerformance"
@@ -121,18 +125,8 @@ classif_qda <- train(classif_lrn_qda, classif_task, subset=train_index)
 classif_rpart <- train(classif_lrn_rpart, classif_task, subset=train_index)
 
 
-y_test <-as.numeric(as.character(helocTest$RiskPerformance))
+y_test <-as.numeric((helocTest$RiskPerformance))
 
-
-
-
-
-
-heloc_ok[1] <- lapply(heloc_ok[1], as.character)
-
-for(colname in colnames(heloc_ok[-1])) {
-  heloc_ok[colname,] <- lapply(heloc_ok[colname, ], function(x) {as.numeric(as.character(x))})  
-}
 
 # TEST
 
@@ -149,36 +143,43 @@ custom_predict <- function(object, newdata) {
   return(response)
 }
 
-
-
-
-
-
-
-
-
-
 custom_predict_classif <- function(object, newdata) {pred <- predict(object, newdata=newdata)
 response <- pred$data[,3]
 return(response)}
 
 explainer_classif_rf <- DALEX::explain(classif_rf, data=helocTest, y=y_test, label= "rf", predict_function = custom_predict_classif)
-explainer_classif_gbm <- DALEX::explain(classif_glm, data=wineTest, y=y_test, label="glm", predict_function = custom_predict_classif)
+explainer_classif_gbm <- DALEX::explain(classif_gbm, data=helocTest, y=y_test, label="glm", predict_function = custom_predict_classif)
 explainer_classif_svm <- DALEX::explain(classif_svm, data=helocTest, y=y_test, label ="svm", predict_function = custom_predict_classif)
 explainer_classif_qda <- DALEX::explain(classif_qda, data=helocTest, y=y_test, label ="qda", predict_function = custom_predict_classif)
 explainer_classif_rpart <- DALEX::explain(classif_rpart, data=helocTest, y=y_test, label ="rpart", predict_function = custom_predict_classif)
 
-lapply(heloc_clean[2], function(x) {as.numeric(as.character(x))})
 
 
-
-mp_classif_rf<-model_performance(explainer_classif_rf);mp_classif_rf
-mp_classif_glm <- model_performance(explainer_classif_glm)
+mp_classif_rf<-model_performance(explainer_classif_rf)
+mp_classif_glm <- model_performance(explainer_classif_gbm)
 mp_classif_svm <- model_performance(explainer_classif_svm)
 mp_classif_qda <- model_performance(explainer_classif_qda)
 mp_classif_rpart <- model_performance(explainer_classif_rpart)
 plot(mp_classif_rf)
 
+getParamSet(classif_lrn_rf)
+
+rf_pars <- tuneParams(
+  
+  makeLearner("classif.randomForest", predict.type = "prob"),
+  subsetTask(classif_task),
+  resampling = cv5,
+  measures = mlr::auc,
+  par.set = makeParamSet(
+    makeDiscreteParam("ntree", values = 100:1000),
+    makeDiscreteParam("mtry", values = 10:50),
+    makeDiscreteParam("nodesize", values = seq(1, 50, by = 5))
+  ),
+  control = makeTuneControlRandom(maxit = 100)
+  # makeTuneControlGrid
+  # makeTuneControlMBO
+  # itd
+)
 
 
 
