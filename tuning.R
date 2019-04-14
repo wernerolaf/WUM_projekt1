@@ -1,6 +1,7 @@
 
 library(mlr)
 heloc_ok<-read.csv("heloc_ok.csv")
+heloc_ok<-heloc_ok[-1]
 classif_task <- makeClassifTask( data = heloc_ok, target = "RiskPerformance")
 rf_pars <- tuneParams(
   
@@ -13,6 +14,6 @@ rf_pars <- tuneParams(
     makeDiscreteParam("mtry", values = 10:50),
     makeDiscreteParam("nodesize", values = seq(1, 50, by = 5))
   ),
-  control = makeTuneControlRandom(maxit = 100)
+  control = makeTuneControlRandom(maxit = 10)
   
 )
