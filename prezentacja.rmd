@@ -1,3 +1,4 @@
+
 ---
 title: "Wstęp do uczenia maszynowego - projekt nr 1"
 author: "Joanna Gajewska & Olaf Werner & Bogdan Jastrzębski"
@@ -13,7 +14,6 @@ library(readr)
 library(mlr)
 library(ggplot2)
 library(DALEX)
-library(kableExtra)
 library(knitr)
 # Wczytywanie datasetu
 
@@ -103,11 +103,17 @@ knitr::include_graphics("variables_lda.png")
 knitr::include_graphics("ROC.png")
 ```
 
+
+##AUC
+
+```{r out.width = "700px", out.height= "460px"}
+knitr::include_graphics("AUCasia.png")
+```
+
+
+
 ## Dziękujemy za uwagę!
 
-Olaf Werner
-Bogdan Jastrzębski
-Joanna Gajewska
 
 
 
