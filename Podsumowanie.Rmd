@@ -80,7 +80,7 @@ Nasze rezultaty:
  
 ```{r echo=FALSE}
 task<-makeClassifTask(id = "task", data = heloc_ok, target ="RiskPerformance")
-learner_rf<-makeLearner("classif.randomForest",predict.type = "prob")
+learner_rf<-makeLearner("classif.randomForest",predict.type = "prob",par.vals =list(ntree=923,mtry=13,nodesize=36))
 test_rf <- resample(learner_rf, task, cv,measures = auc,show.info = FALSE)
 print(test_rf)
 roc_r = generateThreshVsPerfData(test_rf$pred, list(fpr, tpr), aggregate = TRUE)
@@ -93,9 +93,7 @@ plotROCCurves(roc_r)
 ```
 
 ```
-Tune result:
-Op. pars: ntree=923; mtry=13; nodesize=36
-auc.test.mean=0.7999180
+ntree=923; mtry=13; nodesize=36
 ```
 ## Dziękujemy za uwagę
 
