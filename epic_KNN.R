@@ -45,7 +45,7 @@ heloc_ok$MaxDelqEver<-factor(heloc_ok$MaxDelqEver)
 heloc_ok$MaxDelq2PublicRecLast12M<-factor(heloc_ok$MaxDelq2PublicRecLast12M)
 
 
-heloc_ok<-read.csv("heloc_ok.csv")
+heloc_ok<-read.csv("heloc_ok.csv")[-1]
 
 #
 outcome <- "RiskPerformance"
@@ -167,7 +167,45 @@ getParamSet(classif_lrn_rf)
 rf_pars <- tuneParams(
   
   makeLearner("classif.randomForest", predict.type = "prob"),
-  subsetTask(classif_task),
+  classif_task,
+  resampling = cv5,
+  measures = mlr::auc,
+  par.set = makeParamSet(
+    makeDiscreteParam("ntree", values = 100:1000),
+    makeDiscreteParam("mtry", values = 10:50),
+    makeDiscreteParam("nodesize", values = seq(1, 50, by = 5))
+  ),
+  control = makeTuneControlRandom(maxit = 20)
+  # makeTuneControlGrid
+  # makeTuneControlMBO
+  # itd
+)
+
+
+
+## one hot encoding 
+
+# sprawdzenie typów kolumn
+library(caret)
+
+ncol(heloc_ok)
+
+for(i in 1:ncol(heloc_ok)) {
+  print(class(heloc_ok[,i]))
+}
+
+heloc_ok[,"MaxDelqEver"] <- as.factor(heloc_ok[,"MaxDelqEver"])
+heloc_ok[,"MaxDelq2PublicRecLast12M"] <- as.factor(heloc_ok[,"MaxDelq2PublicRecLast12M"])
+
+library(data.table)
+library(mltools)
+heloc_even_better <- one_hot(as.data.table(heloc_ok), cols = c("MaxDelqEver","MaxDelq2PublicRecLast12M"))
+
+
+rf_pars_better <- tuneParams(
+  
+  makeLearner("classif.randomForest", predict.type = "prob"),
+  subsetTask(makeClassifTask(data = data.frame(heloc_even_better), target = "RiskPerformance")),
   resampling = cv5,
   measures = mlr::auc,
   par.set = makeParamSet(
@@ -181,6 +219,7 @@ rf_pars <- tuneParams(
   # itd
 )
 
+rf_pars_better
 
 
 

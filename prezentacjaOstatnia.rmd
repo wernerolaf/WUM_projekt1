@@ -1,0 +1,60 @@
+
+---
+title: "Wstêp do uczenia maszynowego - projekt nr 1"
+author: "Joanna Gajewska & Olaf Werner & Bogdan Jastrzêbski"
+date: "April 2, 2019"
+output: ioslides_presentation
+---
+
+```{r setup, include=FALSE}
+
+```
+
+## Nasz problem
+
+Naszym problemem by³a ocena zdolnoœci kredytowej klientów banku. Dane pochodz¹ z FICO 
+
+```{r, out.width = "500px", out.height= "360px"}
+knitr::include_graphics("logo.png")
+```
+
+## Przetestowane modele - przypomnienie
+
+Przetestowaliœmy wstêpnie modele:
+
+* svm
+* rpart
+* Ida
+* qda
+* rf
+
+Najlepszym okaza³ siê rf (las losowy)
+
+## Ostateczny feature engineering
+
+Imputacja KNN
+one hot encoding na zmiennych kategorycznych
+
+## Poszukiwanie najlepszych parametrów randomForest
+
+pakiet ? - tune params
+
+```{r}
+knitr::include_graphics("")
+```
+
+## Nasze wyniki - porównanie modeli
+
+```{r}
+knitr::include_graphics("")
+```
+
+
+
+## DziÄ™kujemy za uwagÄ™!
+
+
+
+
+
+
