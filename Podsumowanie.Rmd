@@ -1,5 +1,5 @@
 ---
-title: "Wstęp do uczenia maszynowego - projekt nr 1"
+title: "WUM - projekt nr 1"
 author: "Joanna Gajewska & Olaf Werner & Bogdan Jastrzębski"
 date: "April 14, 2019"
 output: ioslides_presentation
@@ -21,9 +21,23 @@ heloc_ok$RiskPerformance<-factor(heloc_ok$RiskPerformance)
 heloc_dataset_v1 <- read_csv("heloc_dataset_v1.csv")
 heloc_dataset_v1$RiskPerformance<-factor(heloc_dataset_v1$RiskPerformance)
 ```
+## Nasz zbiór - Fico
+Naszym problemem była ocena zdolności kredytowej klientów banku. 
 
-## Nasz zbiór danych i pierwsze dopasowanie
-Na samym początku mieliśmy nieoczyszczony zbiór danych FICO zobaczmy jak dla niego to wszytko działało
+```{r, out.width = "500px", out.height= "360px"}
+knitr::include_graphics("logo.png")
+```
+
+## W ostatniej prezentacji
+
+```{r}
+knitr::include_graphics("ROC.png")
+```
+Nasz wybór: random forest.
+
+## RandomForest
+
+Pierwsze kroki w losowym lesie...
 
 ```{r echo=FALSE }
 task<- makeClassifTask(id = "task", data = heloc_dataset_v1, target ="RiskPerformance")
@@ -33,18 +47,21 @@ test_rpart <- resample(learner_rpart, task, cv,measures = auc,show.info = FALSE)
 print(test_rpart)
 ```
 
-Pięć linii kodu i pięć minut roboty daje nam około 77% AUC
-
-##Krzywa ROC
+## Krzywa ROC
 ```{r}
 roc_r = generateThreshVsPerfData(test_rpart$pred, list(fpr, tpr), aggregate = TRUE)
 plotROCCurves(roc_r)
 ```
 
-##Czyszczenie 
-W ramach czyszczenia zamieniliśmy typy odpowiednich zmiennych, usunęliśmy puste wiersze, ale nadal masę braków danych, dlatego w zależności od flagi braku podstawialiśmy różne rzeczy, przede wszystkim zrobiliśmy imputacje używając knn i w miejsce braku dawaliśmy średnią z 5 najbardziej podobnych rekordów.
+## Dataset engineering
 
-##EPIC KNN IMPUTATION!
+W ramach wstępnego czyszczenia danych:
+* zamieniliśmy typy odpowiednich zmiennych,
+* usunęliśmy puste wiersze.
+
+Braki w bazie danych są nadal duże. 
+
+## EPIC KNN IMPUTATION!
 
 ```{r echo=TRUE}
 # for(i in 1:nrow(heloc_unclean)) {
@@ -58,9 +75,8 @@ W ramach czyszczenia zamieniliśmy typy odpowiednich zmiennych, usunęliśmy pus
 # }
 ```
 
-##Ostateczna ostateczność
-W ostatniej prezentacji pokazaliśmy że wszystkie zmienne są dość ważne i pokazaliśmy że dla randomForest osiągane są najlepsze wyniki,
- postanowiliśmy więc je ztuningować i oto rezultaty
+## Tuning parametrów
+Nasze rezultaty:
  
 ```{r echo=FALSE}
 task<-makeClassifTask(id = "task", data = heloc_ok, target ="RiskPerformance")
@@ -70,11 +86,16 @@ print(test_rf)
 roc_r = generateThreshVsPerfData(test_rf$pred, list(fpr, tpr), aggregate = TRUE)
 ```
  
-##WOW
+## Wyniki
+
 ```{r}
 plotROCCurves(roc_r)
 ```
 
-##Podsumowanie
-Po wielu godzinach pracy związanej z czyszczeniem, tuningowaniem i ustalaniem najlepszego modelu otrzymujemy 79 AUC co daje nam zwrost 0 2%.
+```
+Tune result:
+Op. pars: ntree=923; mtry=13; nodesize=36
+auc.test.mean=0.7999180
+```
+## Dziękujemy za uwagę
 
