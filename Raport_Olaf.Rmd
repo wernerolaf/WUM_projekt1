@@ -1,0 +1,13 @@
+---
+title: "Raport"
+author: "Olaf Werner"
+date: "April 18, 2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+W naszym zbiorze danych nawet po usunieciu pustych wierszy zostalo duzo braków danych. Postanowilismy je zastapic uzywajac metody k najblizszych sasiadow. znajdowalismy na danych bez zadnych brakow 5 najbardziej podobnych rekordow i zastepowalismy te braki srednia z nich 

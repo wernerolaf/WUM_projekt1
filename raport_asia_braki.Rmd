@@ -1,0 +1,61 @@
+---
+title: ''
+author: "Joanna Gajewska, Olaf Werner, Bogdan Jastrzębski"
+date: "18 April 2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(knitr)
+```
+
+## Wstęp
+
+Nasz projekt dotyczy tematu skoringu kredytowego. 
+Głównym zadaniem była ocena zdolności kredytowej klientów banku. Dane, które otrzymaliśmy zawierały następujące cechy :
+
+RiskPerformance <- target 
+ExternalRiskEstimate
+MSinceOldestTradeOpen
+MSinceMostRecentTradeOpen
+AverageMInFile
+NumSatisfactoryTrades
+NumTrades60Ever2DerogPubRec
+NumTrades90Ever2DerogPubRec
+PercentTradesNeverDelq
+MSinceMostRecentDelq
+MaxDelq2PublicRecLast12M
+MaxDelqEver
+NumTotalTrades
+NumTradesOpeninLast12M
+PercentInstallTrades
+MSinceMostRecentInqexcl7days
+NumInqLast6M
+NumInqLast6Mexcl7days
+NetFractionRevolvingBurden
+NetFractionInstallBurden
+NumRevolvingTradesWBalance
+NumInstallTradesWBalance
+NumBank2NatlTradesWHighUtilization
+PercentTradesWBalance
+
+
+##Braki  
+Następnym krokiem, po tym jak zapoznaliśmy się z cechami datasetu, było sprawdzenie jakie wartości przyjmują, czy zawierają braki lub wartości reprezentujące inne znaczenie. Okazało się, że zbiór danych nie posiada żadnych wartości NA, jednak pojawiają się cyfry ujemne : -9, -8, -7 które oznaczją pewne zdarzenia. 
+
+![tytul](braki1.png)
+
+* ***-9*** -
+Analzując dostarczony do datasetu słownik, uznaliśmy daną wartość za brak. Te wartości często występowały całymi wierszami, co nie dawało nam żadnych informacji na temat zdolności kredytowej danego klienta. Postanowiliśmy  rekordy zawierające  -9 (ok. 600 wierszy). 
+![tytul](braki2.png)
+
+* ***-8*** -
+W tym przypadku mieliśmy największy problem z interpretacją. Wartości były porozrzucane po całym datasecie, nie zachowując żadnej regularności. Uznaliśmy je jako braki i postanowiliśmy skorzytać z klasyfikatora knn, za jego pomocą imutowaliśmy brakujące dane.
+
+
+
+* ***-7*** -
+ Tę wartość interpretowaliśmy na korzyść klienta. Występowała w sytuacjach dotycznacych np. ilości miesięcy od ostatniego zadłużenia. Z opisu w słowniczku wynikało, że dane zdarzenie nie zostało zarejestrowane, co implikowało, że klient nie był nigdy zadłużony. W związku z czym przypisywaliśmy odpowiednie wartości dla poszczególnych cech, tak by korzystnie wpływały na ocenę klienta. 
+
+
