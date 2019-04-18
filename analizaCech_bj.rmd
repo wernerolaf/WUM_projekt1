@@ -67,6 +67,8 @@ wielkoœci zbioru danych (10 459), jednak kilka kolumn zawiera flag bardzo du¿o. 
 
 ### Risk Performance
 
+![asdf](wykresy_prezentacja1/RiskPerformance.png)
+
 Zbiór wartoœci: {Good, Bad}
 
 * -9 : 0
@@ -82,6 +84,8 @@ kredyt w wyznaczonym terminie.
 
 ### External Risk Estimate
 
+![asdf](wykresy_prezentacja1/ExternalRiskEstimate.png)
+
 Zbiór wartoœci: 0-100%
 
 * -9 : 0
@@ -95,6 +99,8 @@ dzia³aj¹cych na korzyœæ b¹dŸ niekorzyœæ kredytobiorcy.
 
 ### Months Since Oldest Trade Open
 
+![asdf](wykresy_prezentacja1/MSinceOldestTradeOpen.png)
+
 Zbiór wartoœci: 0-100%
 
 * -9 : 0
@@ -107,6 +113,8 @@ Liczba miesiêcy od otwarcia najstarszego kredytu.
 
 ### Months Since Most Recent Trade Open 
 
+![asdf](wykresy_prezentacja1/MSinceMostRecentTradeOpen.png)
+
 Zbiór wartoœci: 0, 1, 2, 3…
 
 * -9 : 0  
@@ -118,6 +126,8 @@ Zbiór wartoœci: 0, 1, 2, 3…
 Liczba miesiêcy od otwarcia ostatniego kredytu.
 
 ### Average Months in File
+
+![asdf](wykresy_prezentacja1/AverageMInFile.png)
 
 Zbiór wartoœci: 0, 1, 2, 3…
 
@@ -132,6 +142,8 @@ Zbiór wartoœci: 0, 1, 2, 3…
 
 ### Number Satisfactory Trades
 
+![asdf](wykresy_prezentacja1/NumSatisfactoryTrades.png)
+
 Zbiór wartoœci: $\mathcal{R}_+$
 
 * -9 : 0
@@ -143,6 +155,8 @@ Zbiór wartoœci: $\mathcal{R}_+$
 Liczba sp³aconych kredytów.
 
 ### Number Trades 60+ Ever
+
+![asdf](wykresy_prezentacja1/NumTrades60Ever2DerogPubRec.png)
 
 Zbiór wartoœci: $\mathcal{R}_+$
 
@@ -156,6 +170,8 @@ Liczba kredytów ponad 60 tys.
 
 ### Number Trades 90+ Ever
 
+![asdf](wykresy_prezentacja1/NumTrades90Ever2DerogPubRec.png)
+
 Zbiór wartoœci: 0, 1, 2, 3…
 
 * -9 : 0
@@ -168,6 +184,8 @@ Liczba kredytów ponad 90 tys.
 
 ### Percent Trades Never Delinquent  
 
+![asdf](wykresy_prezentacja1/PercentTradesNeverDelq.png)
+
 Zbiór wartoœci: 0-100%
 
 * -9 : 0
@@ -178,7 +196,9 @@ Zbiór wartoœci: 0-100%
 
 Procent kredytów nigdy niezaleg³ych.
 
-### Months Since Most Recent Delinquency               
+### Months Since Most Recent Delinquency      
+
+![asdf](wykresy_prezentacja1/MSinceMostRecentDelq.png)
 
 Zbiór wartoœci: 0, 1, 2, 3…
 
@@ -195,7 +215,9 @@ Liczba miesiêcy od ostatniego opóŸnienia.
 ###
 
 
-### Number Total Trades                    
+### Number Total Trades          
+
+![asdf](wykresy_prezentacja1/NumTotalTrades.png)
 
 Zbiór wartoœci: 0, 1, 2, 3…
 
@@ -207,7 +229,9 @@ Zbiór wartoœci: 0, 1, 2, 3…
 
 Ca³kowita liczba kredytów lub inaczej liczba kont kredytowych.
 
-### Number Trades Open in Last 12 Months          
+### Number Trades Open in Last 12 Months     
+
+![asdf](wykresy_prezentacja1/NumTradesOpeninLast12M.png)
 
 Zbiór wartoœci: 0, 1, 2, 3…
 
@@ -219,7 +243,9 @@ Zbiór wartoœci: 0, 1, 2, 3…
 
 Liczba kredytów zaci¹gniêtych podczas ostatnich dwunastu miesiêcy.
 
-### Percent Installment Trades              
+### Percent Installment Trades    
+
+![asdf](wykresy_prezentacja1/PercentInstallTrade.png)
 
 Zbiór wartoœci: 0-100%
 
@@ -233,6 +259,8 @@ Odsetek kredytów, które by³y ratalne tj. sp³acane w ratach.
 
 ### Months Since Most Recent Inq. Excl. 7 days      
 
+![asdf](wykresy_prezentacja1/MSinceMostRecentInqexcl7days.png)
+
 Zbiór wartoœci: 0, 1, 2, 3…
 
 * -9 : 0
@@ -243,7 +271,9 @@ Zbiór wartoœci: 0, 1, 2, 3…
 
 Liczba miesiêcy od ostatniego sprawdzenia kredytu (przekraczaj¹ce 7 dni).
 
-### Number Inq. Last 6 Months                      
+### Number Inq. Last 6 Months      
+
+![asdf](wykresy_prezentacja1/NumInqLast6M.png)
 
 Zbiór wartoœci: 0, 1, 2, 3…
 
@@ -255,7 +285,9 @@ Zbiór wartoœci: 0, 1, 2, 3…
 
 Liczba sprawdzeñ kredytu podczas ostatnich 6 miesiêcy.
 
-### Number Inq. Last 6 Months excl. 7 days             
+### Number Inq. Last 6 Months excl. 7 days  
+
+![asdf](wykresy_prezentacja1/NumInqLast6Mexcl7days.png)
 
 Zbiór wartoœci: 0, 1, 2, 3…
 
@@ -269,6 +301,8 @@ Liczba sprawdzeñ kredtu przekaraczaj¹cych 7 dni.
 
 ### Net Fraction Revolving Burden
 
+![asdf](wykresy_prezentacja1/NetFractionRevolvingBurden.png)
+
 Zbiór wartoœci: 0, 1, 2, 3…
 
 * -9 : 0
@@ -281,6 +315,8 @@ Udzia³ kredytów rolowanych w obci¹¿eniu kredytowym.
 
 ### Net Fraction Installment Burden
 
+![asdf](wykresy_prezentacja1/NetFractionInstallBurde.png)
+
 Zbiór wartoœci: 0, 1, 2, 3…
 
 * -9 : 0
@@ -292,6 +328,8 @@ Zbiór wartoœci: 0, 1, 2, 3…
 Udzia³ kredytów ratalnych w obci¹¿eniu kredytowym.
 
 ### Number of Revolving Trades With Balance
+
+![asdf](wykresy_prezentacja1/NumRevolvingTradesWBalance.png)
 
 Zbiór wartoœci: 0, 1, 2, 3…
 
@@ -308,6 +346,8 @@ kredyt dalej.
 
 ### Number of Installment Trades With Balance
 
+![asdf](wykresy_prezentacja1/NumInstallTradesWBalance.png)
+
 Zbiór wartoœci: 0, 1, 2, 3…
 
 * -9 : 0
@@ -319,6 +359,8 @@ Zbiór wartoœci: 0, 1, 2, 3…
 Liczba kredytów ratalnych ze zbalansowaniem pod koniec, jak wy¿ej.
 
 ### NumBank2NatlTradesWHighUtilization
+
+![asdf](wykresy_prezentacja1/NumBank2NatlTradesWHighUtilization.png)
 
 Zbiór wartoœci: 0, 1, 2, 3…
 
@@ -332,6 +374,7 @@ Liczba kredytów o du¿ym zysku.
 
 ###  Percent of Trades With Balance
 
+![asdf](wykresy_prezentacja1/PercentTradesWBalance.png)
 
 Zbiór wartoœci: 0-100%
 
