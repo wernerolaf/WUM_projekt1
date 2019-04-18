@@ -1,0 +1,351 @@
+---
+title: "Analiza datasetu - cechy"
+author: "Joanna Gajewska & Olaf Werner & Bogdan Jastrzêbski"
+date: "April 14, 2019"
+output: html_document
+---
+
+# 1. Wstêpna analiza zbioru danych
+
+---
+
+W tej czêœci znajduje siê przeprowadzona przez nas analiza dostêpnego 
+zbioru danych. Zinterpretowaliœmy cechy rekordów, ich znaczenie, a tak¿e
+rozmaite flagi wykorzystane przez autorów, do oznaczania braków, nieœcis³oœci etc. 
+
+***
+
+## 1.1 Flagi
+
+---
+
+W danych pojawiaj¹ siê nastêpuj¹ce flagi:
+
+* -9 - brak zapisu biurowego lub brak przeœledzenia
+
+* -8 - brak u¿ytecznych/wa¿nych kredytów lub recenzji kredytu
+
+* -7 - warunek niespe³niony
+
+`-9` oznacza zwyk³y brak danych, brak zapisu o czymœ. 
+Zwykle kiedy w rekordzie pojawia³a siê flaga `-9`, pojawia³a
+siê we wszystkich kolumnach rekordu. Takich rekordów by³o 558 na 10 459 wszystkich rekordów datasetu. Te rekordy _usunêliœmy_.
+
+`-8` oznacza brak danych u¿ytecznych. W odró¿nieniu od `-9` ta flaga nie
+pojawia³a siê w ca³ym rekordzie. Poniewa¿ liczba rekordów zawieraj¹cych 
+tê flagê by³a bardzo du¿a, braki te imputowaliœmy (patrz roz. N).
+
+Flaga `-7` pojawia³a siê wtedy, gdy dla danego kredytobiorcy danych 
+nie da siê logicznie uzupe³niæ, np. je¿eli dana kolumna podaje czas od 
+ostatniego spóŸnienia w sp³acaniu kredytu, podczas gdy kredytobiorca nie 
+spóŸni³ siê ani razu. Z oczywistych wzglêdów mierzenie czasu, który
+up³yn¹³ od zdarzenia, które nie zasz³o, jest nielogiczne.
+
+***
+
+## 1.2 Flagi - krótkie zestawienie
+
+Oto jak przedstawia siê udzia³ poszczególnych flag w ró¿nych kolumnach:
+
+| Nazwa kolumny | *-9* | *-8* | *-7* |
+|---|---|---|---|
+| ExternalRiskEstimate               | 10 | 0  | 0  |
+| MSinceOldestTradeOpen              | 0  | 239| 0  |
+| MSinceMostRecentDelq               | 0  | 176|4664|
+| MSinceMostRecentInqexcl7days       | 0  | 476|1855|
+| NetFractionRevolvingBurden         | 0  | 186| 0  |
+| NetFractionInstallBurden           | 0  |3419| 0  |
+| NumRevolvingTradesWBalance         | 0  | 156| 0  |
+| NumInstallTradesWBalance           | 0  | 861| 0  |
+| NumBank2NatlTradesWHighUtilization | 0  | 583| 0  |
+| PercentTradesWBalance              | 0  | 18 | 0  |
+
+Jak widaæ przeciêtnie dane wystêpuj¹ w ma³ej licznoœci w stosunku do 
+wielkoœci zbioru danych (10 459), jednak kilka kolumn zawiera flag bardzo du¿o. W sumie wierszy bez flag `-9`, `-8` i `-7` jest 2502, czyli zaledwie $\frac{1}{4}$ zbioru.
+
+## 1.3 Interpretacja i analiza cech
+
+### Risk Performance
+
+Zbiór wartoœci: {Good, Bad}
+
+* -9 : 0
+
+* -8 : 0
+
+* -7 : 0
+
+Czy zap³acono w terminie umowy? (12-36 miesiêcy) 
+
+Watroœæ przez nas przewidywana. Odpowiada na pytanie, czy klient sp³aci³ 
+kredyt w wyznaczonym terminie.
+
+### External Risk Estimate
+
+Zbiór wartoœci: 0-100%
+
+* -9 : 0
+
+* -8 : 239
+
+* -7 : 0
+
+Zewnêtrzna ocena kredytobiorcy. Z³o¿enie wielu nieznananych znaczników,
+dzia³aj¹cych na korzyœæ b¹dŸ niekorzyœæ kredytobiorcy. 
+
+### Months Since Oldest Trade Open
+
+Zbiór wartoœci: 0-100%
+
+* -9 : 0
+
+* -8 : 239
+
+* -7 : 0
+
+Liczba miesiêcy od otwarcia najstarszego kredytu.
+
+### Months Since Most Recent Trade Open 
+
+Zbiór wartoœci: 0, 1, 2, 3…
+
+* -9 : 0  
+
+* -8 : 239  
+
+* -7 : 0
+
+Liczba miesiêcy od otwarcia ostatniego kredytu.
+
+### Average Months in File
+
+Zbiór wartoœci: 0, 1, 2, 3…
+
+* -9 : 0
+
+* -8 : 0
+
+* -7 : 0
+
+Œredni czas zad³u¿enia.
+
+
+### Number Satisfactory Trades
+
+Zbiór wartoœci: $\mathcal{R}_+$
+
+* -9 : 0
+
+* -8 : 0
+
+* -7 : 0
+
+Liczba sp³aconych kredytów.
+
+### Number Trades 60+ Ever
+
+Zbiór wartoœci: $\mathcal{R}_+$
+
+* -9 : 0
+
+* -8 : 0
+
+* -7 : 0
+
+Liczba kredytów ponad 60 tys.
+
+### Number Trades 90+ Ever
+
+Zbiór wartoœci: 0, 1, 2, 3…
+
+* -9 : 0
+
+* -8 : 0
+
+* -7 : 0
+
+Liczba kredytów ponad 90 tys.
+
+### Percent Trades Never Delinquent  
+
+Zbiór wartoœci: 0-100%
+
+* -9 : 0
+
+* -8 : 0
+
+* -7 : 0
+
+Procent kredytów nigdy niezaleg³ych.
+
+### Months Since Most Recent Delinquency               
+
+Zbiór wartoœci: 0, 1, 2, 3…
+
+* -9 : 0
+
+* -8 : 176
+
+* -7 : 4664
+
+Liczba miesiêcy od ostatniego opóŸnienia.
+
+###
+
+###
+
+
+### Number Total Trades                    
+
+Zbiór wartoœci: 0, 1, 2, 3…
+
+* -9 : 0
+
+* -8 : 0
+
+* -7 : 0
+
+Ca³kowita liczba kredytów lub inaczej liczba kont kredytowych.
+
+### Number Trades Open in Last 12 Months          
+
+Zbiór wartoœci: 0, 1, 2, 3…
+
+* -9 : 0
+
+* -8 : 0
+
+* -7 : 0
+
+Liczba kredytów zaci¹gniêtych podczas ostatnich dwunastu miesiêcy.
+
+### Percent Installment Trades              
+
+Zbiór wartoœci: 0-100%
+
+* -9 : 0
+
+* -8 : 0
+
+* -7 : 0
+
+Odsetek kredytów, które by³y ratalne tj. sp³acane w ratach. 
+
+### Months Since Most Recent Inq. Excl. 7 days      
+
+Zbiór wartoœci: 0, 1, 2, 3…
+
+* -9 : 0
+
+* -8 : 476
+
+* -7 : 1855
+
+Liczba miesiêcy od ostatniego sprawdzenia kredytu (przekraczaj¹ce 7 dni).
+
+### Number Inq. Last 6 Months                      
+
+Zbiór wartoœci: 0, 1, 2, 3…
+
+* -9 : 0
+
+* -8 : 0
+
+* -7 : 0
+
+Liczba sprawdzeñ kredytu podczas ostatnich 6 miesiêcy.
+
+### Number Inq. Last 6 Months excl. 7 days             
+
+Zbiór wartoœci: 0, 1, 2, 3…
+
+* -9 : 0
+
+* -8 : 0
+
+* -7 : 0
+
+Liczba sprawdzeñ kredtu przekaraczaj¹cych 7 dni. 
+
+### Net Fraction Revolving Burden
+
+Zbiór wartoœci: 0, 1, 2, 3…
+
+* -9 : 0
+
+* -8 : 186
+
+* -7 : 0
+
+Udzia³ kredytów rolowanych w obci¹¿eniu kredytowym. 
+
+### Net Fraction Installment Burden
+
+Zbiór wartoœci: 0, 1, 2, 3…
+
+* -9 : 0
+
+* -8 : 3419
+
+* -7 : 0
+
+Udzia³ kredytów ratalnych w obci¹¿eniu kredytowym.
+
+### Number of Revolving Trades With Balance
+
+Zbiór wartoœci: 0, 1, 2, 3…
+
+* -9 : 0
+
+* -8 : 156
+
+* -7 : 0
+
+Liczba kredytów rolowanych z "balonem", czyli ostateczn¹ du¿¹ sp³at¹. 
+Oczywiœcie kredytów rolowanych siê czêsto wcale nie sp³aca,
+ewentualnie np. kiedy bank uzna, ¿e ryzyko jest zbyt du¿e, by przed³u¿aæ 
+kredyt dalej.
+
+### Number of Installment Trades With Balance
+
+Zbiór wartoœci: 0, 1, 2, 3…
+
+* -9 : 0
+
+* -8 : 861
+
+* -7 : 0
+
+Liczba kredytów ratalnych ze zbalansowaniem pod koniec, jak wy¿ej.
+
+### NumBank2NatlTradesWHighUtilization
+
+Zbiór wartoœci: 0, 1, 2, 3…
+
+* -9 : 0
+
+* -8 : 583
+
+* -7 : 0
+
+Liczba kredytów o du¿ym zysku.
+
+###  Percent of Trades With Balance
+
+
+Zbiór wartoœci: 0-100%
+
+* -9 : 0
+
+* -8 : 18
+
+* -7 : 0
+
+Procent kredytów zbalansowanych, z "balonem".
+
+
+
+
+
+
+
