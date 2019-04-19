@@ -7,7 +7,8 @@ output: html_document
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
+
 ```
 
 ## R Markdown
-W naszym zbiorze danych nawet po usunieciu pustych wierszy zostalo duzo braków danych. Postanowilismy je zastapic uzywajac metody k najblizszych sasiadow. znajdowalismy na danych bez zadnych brakow 5 najbardziej podobnych rekordow i zastepowalismy te braki srednia z nich 
+W naszym zbiorze danych nawet po usunieciu pustych wierszy zostalo duzo braków danych. Dla braków danych oznaczonych flagą -7 dawaliśmy tam maksimum z danej kolumny na korzyść klienta. Pozostałe braki danych postanowilismy zastapic uzywajac metody k najblizszych sasiadow. Znajdowalismy na danych bez zadnych brakow 5 najbardziej podobnych rekordow i zastepowalismy braki srednia z odpowiednich kolumn. 
