@@ -1,17 +1,17 @@
 ---
 title: "Analiza datasetu - cechy"
-author: "Joanna Gajewska & Olaf Werner & Bogdan Jastrzêbski"
+author: "Joanna Gajewska & Olaf Werner & Bogdan JastrzÄ™bski"
 date: "April 14, 2019"
 output: html_document
 ---
 
-# 1. Wstêpna analiza zbioru danych
+# 1. WstÄ™pna analiza zbioru danych
 
 ---
 
-W tej czêœci znajduje siê przeprowadzona przez nas analiza dostêpnego 
-zbioru danych. Zinterpretowaliœmy cechy rekordów, ich znaczenie, a tak¿e
-rozmaite flagi wykorzystane przez autorów, do oznaczania braków, nieœcis³oœci etc. 
+W tej czÄ™Å›ci znajduje siÄ™ przeprowadzona przez nas analiza dostÄ™pnego 
+zbioru danych. ZinterpretowaliÅ›my cechy rekordÃ³w, ich znaczenie, a takÅ¼e
+rozmaite flagi wykorzystane przez autorÃ³w, do oznaczania brakÃ³w, nieÅ›cisÅ‚oÅ›ci etc. 
 
 ***
 
@@ -19,33 +19,33 @@ rozmaite flagi wykorzystane przez autorów, do oznaczania braków, nieœcis³oœci et
 
 ---
 
-W danych pojawiaj¹ siê nastêpuj¹ce flagi:
+W danych pojawiajÄ… siÄ™ nastÄ™pujÄ…ce flagi:
 
-* -9 - brak zapisu biurowego lub brak przeœledzenia
+* -9 - brak zapisu biurowego lub brak przeÅ›ledzenia
 
-* -8 - brak u¿ytecznych/wa¿nych kredytów lub recenzji kredytu
+* -8 - brak uÅ¼ytecznych/waÅ¼nych kredytÃ³w lub recenzji kredytu
 
-* -7 - warunek niespe³niony
+* -7 - warunek niespeÅ‚niony
 
-`-9` oznacza zwyk³y brak danych, brak zapisu o czymœ. 
-Zwykle kiedy w rekordzie pojawia³a siê flaga `-9`, pojawia³a
-siê we wszystkich kolumnach rekordu. Takich rekordów by³o 558 na 10 459 wszystkich rekordów datasetu. Te rekordy _usunêliœmy_.
+`-9` oznacza zwykÅ‚y brak danych, brak zapisu o czymÅ›. 
+Zwykle kiedy w rekordzie pojawiaÅ‚a siÄ™ flaga `-9`, pojawiaÅ‚a
+siÄ™ we wszystkich kolumnach rekordu. Takich rekordÃ³w byÅ‚o 558 na 10 459 wszystkich rekordÃ³w datasetu. Te rekordy _usunÄ™liÅ›my_.
 
-`-8` oznacza brak danych u¿ytecznych. W odró¿nieniu od `-9` ta flaga nie
-pojawia³a siê w ca³ym rekordzie. Poniewa¿ liczba rekordów zawieraj¹cych 
-tê flagê by³a bardzo du¿a, braki te imputowaliœmy (patrz roz. N).
+`-8` oznacza brak danych uÅ¼ytecznych. W odrÃ³Å¼nieniu od `-9` ta flaga nie
+pojawiaÅ‚a siÄ™ w caÅ‚ym rekordzie. PoniewaÅ¼ liczba rekordÃ³w zawierajÄ…cych 
+tÄ™ flagÄ™ byÅ‚a bardzo duÅ¼a, braki te imputowaliÅ›my (patrz roz. N).
 
-Flaga `-7` pojawia³a siê wtedy, gdy dla danego kredytobiorcy danych 
-nie da siê logicznie uzupe³niæ, np. je¿eli dana kolumna podaje czas od 
-ostatniego spóŸnienia w sp³acaniu kredytu, podczas gdy kredytobiorca nie 
-spóŸni³ siê ani razu. Z oczywistych wzglêdów mierzenie czasu, który
-up³yn¹³ od zdarzenia, które nie zasz³o, jest nielogiczne.
+Flaga `-7` pojawiaÅ‚a siÄ™ wtedy, gdy dla danego kredytobiorcy danych 
+nie da siÄ™ logicznie uzupeÅ‚niÄ‡, np. jeÅ¼eli dana kolumna podaje czas od 
+ostatniego spÃ³Åºnienia w spÅ‚acaniu kredytu, podczas gdy kredytobiorca nie 
+spÃ³ÅºniÅ‚ siÄ™ ani razu. Z oczywistych wzglÄ™dÃ³w mierzenie czasu, ktÃ³ry
+upÅ‚ynÄ…Å‚ od zdarzenia, ktÃ³re nie zaszÅ‚o, jest nielogiczne.
 
 ***
 
-## 1.2 Flagi - krótkie zestawienie
+## 1.2 Flagi - krÃ³tkie zestawienie
 
-Oto jak przedstawia siê udzia³ poszczególnych flag w ró¿nych kolumnach:
+Oto jak przedstawia siÄ™ udziaÅ‚ poszczegÃ³lnych flag w rÃ³Å¼nych kolumnach:
 
 | Nazwa kolumny | *-9* | *-8* | *-7* |
 |---|---|---|---|
@@ -60,8 +60,8 @@ Oto jak przedstawia siê udzia³ poszczególnych flag w ró¿nych kolumnach:
 | NumBank2NatlTradesWHighUtilization | 0  | 583| 0  |
 | PercentTradesWBalance              | 0  | 18 | 0  |
 
-Jak widaæ przeciêtnie dane wystêpuj¹ w ma³ej licznoœci w stosunku do 
-wielkoœci zbioru danych (10 459), jednak kilka kolumn zawiera flag bardzo du¿o. W sumie wierszy bez flag `-9`, `-8` i `-7` jest 2502, czyli zaledwie $\frac{1}{4}$ zbioru.
+Jak widaÄ‡ przeciÄ™tnie dane wystÄ™pujÄ… w maÅ‚ej licznoÅ›ci w stosunku do 
+wielkoÅ›ci zbioru danych (10 459), jednak kilka kolumn zawiera flag bardzo duÅ¼o. W sumie wierszy bez flag `-9`, `-8` i `-7` jest 2502, czyli zaledwie $\frac{1}{4}$ zbioru.
 
 ## 1.3 Interpretacja i analiza cech
 
@@ -69,7 +69,7 @@ wielkoœci zbioru danych (10 459), jednak kilka kolumn zawiera flag bardzo du¿o. 
 
 ![asdf](wykresy_prezentacja1/RiskPerformance.png)
 
-Zbiór wartoœci: {Good, Bad}
+ZbiÃ³r wartoÅ›ci: {Good, Bad}
 
 * -9 : 0
 
@@ -77,16 +77,17 @@ Zbiór wartoœci: {Good, Bad}
 
 * -7 : 0
 
-Czy zap³acono w terminie umowy? (12-36 miesiêcy) 
+Czy zapÅ‚acono w terminie umowy? (12-36 miesiÄ™cy) 
 
-Watroœæ przez nas przewidywana. Odpowiada na pytanie, czy klient sp³aci³ 
-kredyt w wyznaczonym terminie.
+WatroÅ›Ä‡ przez nas przewidywana. Odpowiada na pytanie, czy klient spÅ‚aciÅ‚ 
+kredyt w wyznaczonym terminie. Jest to wartoÅ›Ä‡ przez nas przewidywana. Jak 
+widaÄ‡ licznoÅ›ci klas sÄ… podobne. 
 
 ### External Risk Estimate
 
 ![asdf](wykresy_prezentacja1/ExternalRiskEstimate.png)
 
-Zbiór wartoœci: 0-100%
+ZbiÃ³r wartoÅ›ci: 0-100%
 
 * -9 : 0
 
@@ -94,14 +95,16 @@ Zbiór wartoœci: 0-100%
 
 * -7 : 0
 
-Zewnêtrzna ocena kredytobiorcy. Z³o¿enie wielu nieznananych znaczników,
-dzia³aj¹cych na korzyœæ b¹dŸ niekorzyœæ kredytobiorcy. 
+ZewnÄ™trzna ocena kredytobiorcy. ZÅ‚oÅ¼enie wielu nieznananych znacznikÃ³w,
+dziaÅ‚ajÄ…cych na korzyÅ›Ä‡ bÄ…dÅº niekorzyÅ›Ä‡ kredytobiorcy. Jak widaÄ‡ rozkÅ‚ady 
+grupy, ktÃ³ra spÅ‚aciÅ‚a na czas i grupy ktÃ³ra nie spÅ‚aciÅ‚a rÃ³Å¼niÄ… siÄ™ w przewidywalny
+sposÃ³b. Potencjalnie bardzo waÅ¼na zmienna. 
 
 ### Months Since Oldest Trade Open
 
 ![asdf](wykresy_prezentacja1/MSinceOldestTradeOpen.png)
 
-Zbiór wartoœci: 0-100%
+ZbiÃ³r wartoÅ›ci: 0-100%
 
 * -9 : 0
 
@@ -109,27 +112,32 @@ Zbiór wartoœci: 0-100%
 
 * -7 : 0
 
-Liczba miesiêcy od otwarcia najstarszego kredytu.
+Liczba miesiÄ™cy od otwarcia najstarszego kredytu.
+RozkÅ‚ady podobne, jednak rÃ³Å¼ne. WskazujÄ…, Å¼e starzy klienci
+czÄ™Å›ciej spÅ‚acajÄ… w czasie. (Tutaj uproszczenie, zakÅ‚adamy Å¼e jeÅ¼eli
+pierwszy kredyt otwarty zostaÅ‚ dawno, to klient jest stary).
 
 ### Months Since Most Recent Trade Open 
 
 ![asdf](wykresy_prezentacja1/MSinceMostRecentTradeOpen.png)
 
-Zbiór wartoœci: 0, 1, 2, 3…
+ZbiÃ³r wartoÅ›ci: 0, 1, 2, 3â€¦
 
 * -9 : 0  
 
-* -8 : 239  
+* -8 : 0  
 
 * -7 : 0
 
-Liczba miesiêcy od otwarcia ostatniego kredytu.
+Liczba miesiÄ™cy od otwarcia ostatniego kredytu.
+Praktycznie identyczne rozkÅ‚ady. Tutaj moÅ¼na zastowosaÄ‡ 
+przeksztaÅ‚cenie logarytmiczne. 
 
 ### Average Months in File
 
 ![asdf](wykresy_prezentacja1/AverageMInFile.png)
 
-Zbiór wartoœci: 0, 1, 2, 3…
+ZbiÃ³r wartoÅ›ci: 0, 1, 2, 3â€¦
 
 * -9 : 0
 
@@ -137,14 +145,15 @@ Zbiór wartoœci: 0, 1, 2, 3…
 
 * -7 : 0
 
-Œredni czas zad³u¿enia.
+Åšredni czas spÅ‚aty kredytu w umowie. RÃ³Å¼ne rozkÅ‚ady 
+wskazujÄ…, Å¼e klienci, ktÃ³ry biorÄ… kredyty na dÅ‚uÅ¼szy okres, czÄ™Å›ciej je spÅ‚acajÄ….
 
 
 ### Number Satisfactory Trades
 
 ![asdf](wykresy_prezentacja1/NumSatisfactoryTrades.png)
 
-Zbiór wartoœci: $\mathcal{R}_+$
+ZbiÃ³r wartoÅ›ci: $\mathcal{R}_+$
 
 * -9 : 0
 
@@ -152,13 +161,14 @@ Zbiór wartoœci: $\mathcal{R}_+$
 
 * -7 : 0
 
-Liczba sp³aconych kredytów.
+Liczba spÅ‚aconych kredytÃ³w w przeszÅ‚oÅ›ci. Jak widaÄ‡ ci, ktÃ³rzy czÄ™Å›ciej 
+spÅ‚acali kredyty w przeszÅ‚oÅ›ci majÄ… wiÄ™ksze prawdopodobieÅ„stwo spÅ‚acenia ponownie. 
 
 ### Number Trades 60+ Ever
 
 ![asdf](wykresy_prezentacja1/NumTrades60Ever2DerogPubRec.png)
 
-Zbiór wartoœci: $\mathcal{R}_+$
+ZbiÃ³r wartoÅ›ci: $\mathcal{R}_+$
 
 * -9 : 0
 
@@ -166,13 +176,13 @@ Zbiór wartoœci: $\mathcal{R}_+$
 
 * -7 : 0
 
-Liczba kredytów ponad 60 tys.
+Liczba kredytÃ³w ponad 60 tys. Zmienna dyskretna.
 
 ### Number Trades 90+ Ever
 
 ![asdf](wykresy_prezentacja1/NumTrades90Ever2DerogPubRec.png)
 
-Zbiór wartoœci: 0, 1, 2, 3…
+ZbiÃ³r wartoÅ›ci: 0, 1, 2, 3â€¦
 
 * -9 : 0
 
@@ -180,13 +190,15 @@ Zbiór wartoœci: 0, 1, 2, 3…
 
 * -7 : 0
 
-Liczba kredytów ponad 90 tys.
+Liczba kredytÃ³w ponad 90 tys. Zmienna dyskretna. 
+Podobnie jak poprzednia wskazuje, Å¼e Ci, ktÃ³rzy
+biorÄ… wiÄ™ksze kredyty, rzadziej je spÅ‚acajÄ…. 
 
 ### Percent Trades Never Delinquent  
 
 ![asdf](wykresy_prezentacja1/PercentTradesNeverDelq.png)
 
-Zbiór wartoœci: 0-100%
+ZbiÃ³r wartoÅ›ci: 0-100%
 
 * -9 : 0
 
@@ -194,13 +206,16 @@ Zbiór wartoœci: 0-100%
 
 * -7 : 0
 
-Procent kredytów nigdy niezaleg³ych.
+Procent kredytÃ³w nigdy niezalegÅ‚ych. Jak widaÄ‡
+jest bardzo duÅ¼a liczba klientÃ³w, ktÃ³rzy nigdy siÄ™ nie spÃ³ÅºniajÄ… i 
+zawsze spÅ‚acajÄ… kredyt. Fakt posiadania zalegÅ‚ych kredytÃ³w w przeszÅ‚oÅ›ci
+zwiÄ™ksza prawdopodobieÅ„stwo opÃ³Åºnienia w spÅ‚acie kredytu. 
 
 ### Months Since Most Recent Delinquency      
 
 ![asdf](wykresy_prezentacja1/MSinceMostRecentDelq.png)
 
-Zbiór wartoœci: 0, 1, 2, 3…
+ZbiÃ³r wartoÅ›ci: 0, 1, 2, 3â€¦
 
 * -9 : 0
 
@@ -208,18 +223,61 @@ Zbiór wartoœci: 0, 1, 2, 3…
 
 * -7 : 4664
 
-Liczba miesiêcy od ostatniego opóŸnienia.
+Liczba miesiÄ™cy od ostatniego opÃ³Åºnienia.
+Jak widaÄ‡ ci, ktÃ³rzy nie spÅ‚acili na czas, czÄ™Å›ciej
+niedawno siÄ™ pÃ³Åºnili. 
 
-###
 
-###
+### Max Delq/Public Records Last 12 Months
 
+![asdf](wykresy_prezentacja1/MaxDelq2PublicRecLast12M.png)
+
+Values: {derogatory comment, 
+	       120+ days delinquent,
+	       90 days delinquent,
+	       60 days delinquent,
+	       30 days delinquent,
+	       unknown delinquency,
+	       current and never delinquent,
+	       all other}
+
+* -9 : 0 
+
+* -8 : 0
+
+* -7 : 0
+
+Zmienna kategoryczna. Ci, ktÃ³rzy siÄ™ spÃ³Åºnili w spÅ‚acie kredytu,
+majÄ… czÄ™Å›ciej spÃ³Åºnienia w przeszÅ‚oÅ›ci w szczegÃ³lnoÅ›ci ok 30 dni. 
+
+### Maximum Delinquency Ever                       
+
+![asdf](wykresy_prezentacja1/MaxDelqEver.png)
+
+Values:    {No such value,
+	       derogatory comment, 
+	       120+ days delinquent,
+	       90 days delinquent,
+	       60 days delinquent,
+	       30 days delinquent,
+	       unknown delinquency,
+	       current and never delinquent,
+	       all other}
+         
+* -9 : 0 
+
+* -8 : 0
+
+* -7 : 0
+
+Zmienna kategoryczna. Ponownie ci, ktÃ³rzy siÄ™ spÃ³Åºnili w spÅ‚acie kredytu,
+majÄ… czÄ™Å›ciej spÃ³Åºnienia w przeszÅ‚oÅ›ci.
 
 ### Number Total Trades          
 
 ![asdf](wykresy_prezentacja1/NumTotalTrades.png)
 
-Zbiór wartoœci: 0, 1, 2, 3…
+ZbiÃ³r wartoÅ›ci: 0, 1, 2, 3â€¦
 
 * -9 : 0
 
@@ -227,13 +285,14 @@ Zbiór wartoœci: 0, 1, 2, 3…
 
 * -7 : 0
 
-Ca³kowita liczba kredytów lub inaczej liczba kont kredytowych.
+CaÅ‚kowita liczba kredytÃ³w lub inaczej liczba kont kredytowych.
+Bardzo podobne rozkÅ‚ady.
 
 ### Number Trades Open in Last 12 Months     
 
 ![asdf](wykresy_prezentacja1/NumTradesOpeninLast12M.png)
 
-Zbiór wartoœci: 0, 1, 2, 3…
+ZbiÃ³r wartoÅ›ci: 0, 1, 2, 3â€¦
 
 * -9 : 0
 
@@ -241,13 +300,14 @@ Zbiór wartoœci: 0, 1, 2, 3…
 
 * -7 : 0
 
-Liczba kredytów zaci¹gniêtych podczas ostatnich dwunastu miesiêcy.
+Liczba kredytÃ³w zaciÄ…gniÄ™tych podczas ostatnich dwunastu miesiÄ™cy.
+Bardzo podobne rozkÅ‚ady.
 
 ### Percent Installment Trades    
 
 ![asdf](wykresy_prezentacja1/PercentInstallTrade.png)
 
-Zbiór wartoœci: 0-100%
+ZbiÃ³r wartoÅ›ci: 0-100%
 
 * -9 : 0
 
@@ -255,13 +315,14 @@ Zbiór wartoœci: 0-100%
 
 * -7 : 0
 
-Odsetek kredytów, które by³y ratalne tj. sp³acane w ratach. 
+Odsetek kredytÃ³w, ktÃ³re byÅ‚y ratalne tj. spÅ‚acane w ratach. 
+SpÅ‚acane z opÃ³Åºnieniem kredyty sÄ… czÄ™Å›ciej ratalne. 
 
 ### Months Since Most Recent Inq. Excl. 7 days      
 
 ![asdf](wykresy_prezentacja1/MSinceMostRecentInqexcl7days.png)
 
-Zbiór wartoœci: 0, 1, 2, 3…
+ZbiÃ³r wartoÅ›ci: 0, 1, 2, 3â€¦
 
 * -9 : 0
 
@@ -269,13 +330,14 @@ Zbiór wartoœci: 0, 1, 2, 3…
 
 * -7 : 1855
 
-Liczba miesiêcy od ostatniego sprawdzenia kredytu (przekraczaj¹ce 7 dni).
+Liczba miesiÄ™cy od ostatniego sprawdzenia kredytu (przekraczajÄ…ce 7 dni).
+Jak widaÄ‡ ci, dla ktÃ³rych przewiduje siÄ™ opÃ³Åºnienie sÄ… czÄ™Å›ciej sprawdzani. 
 
 ### Number Inq. Last 6 Months      
 
 ![asdf](wykresy_prezentacja1/NumInqLast6M.png)
 
-Zbiór wartoœci: 0, 1, 2, 3…
+ZbiÃ³r wartoÅ›ci: 0, 1, 2, 3â€¦
 
 * -9 : 0
 
@@ -283,13 +345,13 @@ Zbiór wartoœci: 0, 1, 2, 3…
 
 * -7 : 0
 
-Liczba sprawdzeñ kredytu podczas ostatnich 6 miesiêcy.
+Liczba sprawdzeÅ„ kredytu podczas ostatnich 6 miesiÄ™cy.
 
 ### Number Inq. Last 6 Months excl. 7 days  
 
 ![asdf](wykresy_prezentacja1/NumInqLast6Mexcl7days.png)
 
-Zbiór wartoœci: 0, 1, 2, 3…
+ZbiÃ³r wartoÅ›ci: 0, 1, 2, 3â€¦
 
 * -9 : 0
 
@@ -297,13 +359,13 @@ Zbiór wartoœci: 0, 1, 2, 3…
 
 * -7 : 0
 
-Liczba sprawdzeñ kredtu przekaraczaj¹cych 7 dni. 
+Liczba sprawdzeÅ„ kredtu przekaraczajÄ…cych 7 dni, podczas ostatnich 6 miesiÄ™cy. 
 
 ### Net Fraction Revolving Burden
 
 ![asdf](wykresy_prezentacja1/NetFractionRevolvingBurden.png)
 
-Zbiór wartoœci: 0, 1, 2, 3…
+ZbiÃ³r wartoÅ›ci: 0, 1, 2, 3â€¦
 
 * -9 : 0
 
@@ -311,13 +373,15 @@ Zbiór wartoœci: 0, 1, 2, 3…
 
 * -7 : 0
 
-Udzia³ kredytów rolowanych w obci¹¿eniu kredytowym. 
+UdziaÅ‚ kredytÃ³w rolowanych w obciÄ…Å¼eniu kredytowym. 
+Potencjalnie waÅ¼na zmienna, bardzo duÅ¼a rÃ³Å¼nica rozkÅ‚adÃ³w.
+Ci ktÃ³rzy nie mogÄ… spÅ‚aciÄ‡ kredytu zdecydowanie czÄ™Å›ciej rolujÄ… kredyty (przedÅ‚uÅ¼ajÄ…).
 
 ### Net Fraction Installment Burden
 
 ![asdf](wykresy_prezentacja1/NetFractionInstallBurde.png)
 
-Zbiór wartoœci: 0, 1, 2, 3…
+ZbiÃ³r wartoÅ›ci: 0, 1, 2, 3â€¦
 
 * -9 : 0
 
@@ -325,13 +389,14 @@ Zbiór wartoœci: 0, 1, 2, 3…
 
 * -7 : 0
 
-Udzia³ kredytów ratalnych w obci¹¿eniu kredytowym.
+UdziaÅ‚ kredytÃ³w ratalnych w obciÄ…Å¼eniu kredytowym.
+Bardzo podobne rozkÅ‚ady.
 
 ### Number of Revolving Trades With Balance
 
 ![asdf](wykresy_prezentacja1/NumRevolvingTradesWBalance.png)
 
-Zbiór wartoœci: 0, 1, 2, 3…
+ZbiÃ³r wartoÅ›ci: 0, 1, 2, 3â€¦
 
 * -9 : 0
 
@@ -339,16 +404,17 @@ Zbiór wartoœci: 0, 1, 2, 3…
 
 * -7 : 0
 
-Liczba kredytów rolowanych z "balonem", czyli ostateczn¹ du¿¹ sp³at¹. 
-Oczywiœcie kredytów rolowanych siê czêsto wcale nie sp³aca,
-ewentualnie np. kiedy bank uzna, ¿e ryzyko jest zbyt du¿e, by przed³u¿aæ 
-kredyt dalej.
+Liczba kredytÃ³w rolowanych z "balonem", czyli ostatecznÄ… duÅ¼Ä… spÅ‚atÄ…. 
+OczywiÅ›cie kredytÃ³w rolowanych czÄ™sto siÄ™ wcale nie spÅ‚aca,
+ewentualnie np. kiedy bank uzna, Å¼e ryzyko jest zbyt duÅ¼e, by ponownie przedÅ‚uÅ¼aÄ‡ 
+kredyt. Jak widaÄ‡ klienci, ktÃ³rzy nie spÅ‚acili kredytu na czas, czÄ™Å›ciej spÅ‚acajÄ… 
+kredyty jednÄ… spÅ‚atÄ…. MoÅ¼liwe, Å¼e jest to spowodowane odmÃ³wieniem przez bank rolowania. 
 
 ### Number of Installment Trades With Balance
 
 ![asdf](wykresy_prezentacja1/NumInstallTradesWBalance.png)
 
-Zbiór wartoœci: 0, 1, 2, 3…
+ZbiÃ³r wartoÅ›ci: 0, 1, 2, 3â€¦
 
 * -9 : 0
 
@@ -356,13 +422,13 @@ Zbiór wartoœci: 0, 1, 2, 3…
 
 * -7 : 0
 
-Liczba kredytów ratalnych ze zbalansowaniem pod koniec, jak wy¿ej.
+Liczba kredytÃ³w ratalnych ze zbalansowaniem pod koniec, jak wyÅ¼ej.
 
 ### NumBank2NatlTradesWHighUtilization
 
 ![asdf](wykresy_prezentacja1/NumBank2NatlTradesWHighUtilization.png)
 
-Zbiór wartoœci: 0, 1, 2, 3…
+ZbiÃ³r wartoÅ›ci: 0, 1, 2, 3â€¦
 
 * -9 : 0
 
@@ -370,13 +436,13 @@ Zbiór wartoœci: 0, 1, 2, 3…
 
 * -7 : 0
 
-Liczba kredytów o du¿ym zysku.
+Liczba kredytÃ³w o duÅ¼ym zysku.
 
 ###  Percent of Trades With Balance
 
 ![asdf](wykresy_prezentacja1/PercentTradesWBalance.png)
 
-Zbiór wartoœci: 0-100%
+ZbiÃ³r wartoÅ›ci: 0-100%
 
 * -9 : 0
 
@@ -384,8 +450,10 @@ Zbiór wartoœci: 0-100%
 
 * -7 : 0
 
-Procent kredytów zbalansowanych, z "balonem".
-
+Procent kredytÃ³w zbalansowanych, z "balonem".
+DuÅ¼e rÃ³Å¼nice w rozkÅ‚adach, potencjalnie bardzo waÅ¼na zmienna.
+Ponownie rozkÅ‚ady wskazujÄ…, Å¼e grupa nie spÅ‚acajÄ…ca czÄ™Å›ciej spÅ‚acaÅ‚a
+kredyt w balonie.
 
 
 
