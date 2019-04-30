@@ -35,8 +35,7 @@ give_me_AUC<-function(train_set)
   task <- makeClassifTask(data = train_set, target = "RiskPerformance")
   
   model_all_rf <- makeLearner("classif.randomForest", 
-                                    predict.type = "prob",
-                                    ntree = 100)
+                                    predict.type = "prob")
   
   auc_all_rf<-r <- resample(model_all_rf, task, cv,measures=list(acc))
   
