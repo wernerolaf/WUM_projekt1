@@ -1,9 +1,11 @@
 
 ---
-title: "Wstêp do uczenia maszynowego - projekt nr 1"
-author: "Joanna Gajewska & Olaf Werner & Bogdan Jastrzêbski"
+title: "Wst?p do uczenia maszynowego - projekt nr 1"
+author: "Joanna Gajewska & Olaf Werner & Bogdan Jastrz?bski"
 date: "April 2, 2019"
-output: ioslides_presentation
+output:
+  slidy_presentation: default
+  ioslides_presentation: default
 ---
 
 ```{r setup, include=FALSE}
@@ -12,7 +14,7 @@ output: ioslides_presentation
 
 ## Nasz problem
 
-Naszym problemem by³a ocena zdolnoœci kredytowej klientów banku. Dane pochodz¹ z FICO 
+Naszym problemem by?a ocena zdolno?ci kredytowej klient?w banku. Dane pochodz? z FICO 
 
 ```{r, out.width = "500px", out.height= "360px"}
 knitr::include_graphics("logo.png")
@@ -20,7 +22,7 @@ knitr::include_graphics("logo.png")
 
 ## Przetestowane modele - przypomnienie
 
-Przetestowaliœmy wstêpnie modele:
+Przetestowali?my wst?pnie modele:
 
 * svm
 * rpart
@@ -28,14 +30,14 @@ Przetestowaliœmy wstêpnie modele:
 * qda
 * rf
 
-Najlepszym okaza³ siê rf (las losowy)
+Najlepszym okaza? si? rf (las losowy)
 
 ## Ostateczny feature engineering
 
 Imputacja KNN
 one hot encoding na zmiennych kategorycznych
 
-## Poszukiwanie najlepszych parametrów randomForest
+## Poszukiwanie najlepszych parametr?w randomForest
 
 pakiet ? - tune params
 
@@ -43,7 +45,7 @@ pakiet ? - tune params
 knitr::include_graphics("")
 ```
 
-## Nasze wyniki - porównanie modeli
+## Nasze wyniki - por?wnanie modeli
 
 ```{r}
 knitr::include_graphics("")

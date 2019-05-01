@@ -1,3 +1,4 @@
+
 library(readr)
 library(mlr)
 library(ggplot2)
@@ -20,7 +21,7 @@ classif_lrn_rf <- makeLearner("classif.randomForest", predict.type = "prob")
 classif_lrn_gbm <- makeLearner("classif.gbm", predict.type = "prob")
 classif_lrn_svm <- makeLearner("classif.svm", predict.type = "prob")
 #classif_lrn_qda <- makeLearner("classif.qda", predict.type = "prob")
-classif_lrn_rpart <- makeLearner("classif.rpart", predict.type = "prob")
+classif_lrn_rpart <- makeLearner("classif.rpart", predict.type = "prob", par.vals = list(minsplit=10))
 
 
 cv <- makeResampleDesc("CV", iters = 5)
@@ -33,4 +34,3 @@ test_rpart <- resample(classif_lrn_rpart, task_clean, cv, measures = auc, show.i
 
 roc_r = generateThreshVsPerfData(list(rf=test_rf$pred,gbm=test_gbm$pred,svm=test_svm$pred,rpart=test_rpart$pred), list(fpr, tpr), aggregate = TRUE)
 plotROCCurves(roc_r)
-

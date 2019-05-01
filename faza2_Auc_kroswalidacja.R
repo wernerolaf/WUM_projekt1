@@ -10,22 +10,63 @@ library(MASS)
 library(DALEX)
 library(xgboost)
 library(DataExplorer)
-heloc_dataset_v1<-read.csv(file = "heloc_dataset_v1.csv")
+# heloc_dataset_v1<-read.csv(file = "heloc_dataset_v1.csv")
 
-# Czyszczenie
-#-9
-heloc_no9 <- heloc_dataset_v1[heloc_dataset_v1$ExternalRiskEstimate != -9, ]
-#-7
-heloc_no9$MSinceMostRecentDelq[heloc_no9$MSinceMostRecentDelq == -7]<-max(heloc_no9$MSinceMostRecentDelq)
-heloc_no9$MSinceMostRecentInqexcl7days[heloc_no9$MSinceMostRecentInqexcl7days== -7]<-max(heloc_no9$MSinceMostRecentInqexcl7days)
+# # Czyszczenie
+# #-9
+# heloc_no9 <- heloc_dataset_v1[heloc_dataset_v1$ExternalRiskEstimate != -9, ]
+# #-7
+# heloc_no9$MSinceMostRecentDelq[heloc_no9$MSinceMostRecentDelq == -7]<-max(heloc_no9$MSinceMostRecentDelq)
+# heloc_no9$MSinceMostRecentInqexcl7days[heloc_no9$MSinceMostRecentInqexcl7days== -7]<-max(heloc_no9$MSinceMostRecentInqexcl7days)
+# heloc_dataset_v1<-read.csv(file = "heloc_dataset_v1.csv")
+
+# # Czyszczenie
+# #-9
+# heloc_no9 <- heloc_dataset_v1[heloc_dataset_v1$ExternalRiskEstimate != -9, ]
+# #-7
+# heloc_no9$MSinceMostRecentDelq[heloc_no9$MSinceMostRecentDelq == -7]<-max(heloc_no9$MSinceMostRecentDelq)
+# heloc_no9$MSinceMostRecentInqexcl7days[heloc_no9$MSinceMostRecentInqexcl7days== -7]<-max(heloc_no9$MSinceMostRecentInqexcl7days)
+# #doczyszczanie
+# unclean<-apply(heloc_no9[,-1], 1, function(x){any(x %in% c(-9,-8,-7))})
+# heloc_clean<-heloc_no9[!unclean,]
+# heloc_unclean<-heloc_no9[unclean,]
+
+# # Epic knn imputation
+
+# heloc_clean_knn<-heloc_clean %>% dplyr::select(-MaxDelqEver,-MaxDelq2PublicRecLast12M,-RiskPerformance)
+# heloc_unclean_knn<-heloc_unclean %>% dplyr::select(-MaxDelqEver,-MaxDelq2PublicRecLast12M,-RiskPerformance)
+
+# for(i in 1:nrow(heloc_unclean)) {
+#   #print(i)
+#   badcols <- which(heloc_unclean_knn[i,] %in% c(-9,-8,-7))
+#   k <- FNN::knn(heloc_clean_knn[-badcols], heloc_unclean_knn[i,-badcols], cl=heloc_clean[[1]] , k=5,algorithm="cover_tree")
+#   indices <- attr(k, "nn.index")
+#   heloc_clean_knn[indices[1,],] %>% summarise_at(names(heloc_clean_knn)[badcols],mean)->imput
+#   heloc_unclean_knn[i,badcols]<-imput
+# }
+
+# #mozna optymalniej ale dziala
+# heloc_unclean[!which(names(heloc_unclean) %in% c("MaxDelqEver","MaxDelq2PublicRecLast12M","RiskPerformance"))] <-heloc_unclean_knn
+
+# heloc_ok<-sample_frac(rbind(heloc_clean,heloc_unclean))
+
+
+# heloc_ok$MaxDelqEver<-factor(heloc_ok$MaxDelqEver)
+# heloc_ok$MaxDelq2PublicRecLast12M<-factor(heloc_ok$MaxDelq2PublicRecLast12M)
 
 
 
 
+
+heloc_no9<-read.csv("heloc_ok.csv")
+
+
+heloc_no9
 give_me_AUC<-function(train_set)
 {
   
-  n<-ncol(train_set)-1;
+ 
+  n<-ncol(train_set)-2;
   
 
   cv <- makeResampleDesc("CV", iters = 5)
@@ -37,70 +78,66 @@ give_me_AUC<-function(train_set)
   model_all_rf <- makeLearner("classif.randomForest", 
                                     predict.type = "prob")
   
-  auc_all_rf<-r <- resample(model_all_rf, task, cv,measures=list(acc))
+  auc_all_rf<-r <- resample(model_all_rf, task, cv,measures=list(auc))
   
   AUC<-auc_all_rf$aggr
   name<-"rf"
-  number_of_cols<-n
   AUC
   # SVM
   
   model_all_svm <- makeLearner("classif.svm", 
                                      predict.type = "prob")
   
-  auc_all_svm<-resample(model_all_svm, task, cv,measures=list(acc))
+  auc_all_svm<-resample(model_all_svm, task, cv,measures=list(auc))
   AUC<-append(AUC, auc_all_svm$aggr)
   name<-append(name, "svm")
-  number_of_cols<-append(n, n)
   #rpart
   
   model_all_rpart <- makeLearner("classif.rpart", 
-                                       predict.type = "prob")
+                                       predict.type = "prob", par.vals = list(minsplit = 10))
   
-  auc_all_rpart<-resample(model_all_rpart, task, cv,measures=list(acc))
+  auc_all_rpart<-resample(model_all_rpart, task, cv,measures=list(auc))
   AUC<-append(AUC, auc_all_rpart$aggr)
   name<-append(name, "rpart")
-  number_of_cols<-append(n, n)
-  
-  
+
+  AUC
+  name
   #qda
   
-  model_all_qda <- makeLearner("classif.qda", 
-                                     predict.type = "prob")
+   model_all_qda <- makeLearner("classif.qda", 
+                                      predict.type = "prob")
   
-  auc_all_qda<-resample(model_all_qda, task, cv,measures=list(acc))
+   auc_all_qda<-resample(model_all_qda, task, cv,measures=list(auc))
   
-  AUC<-append(AUC, auc_all_qda$aggr)
-  name<-append(name, "qda")
-  number_of_cols<-append(n, n)
+   AUC<-append(AUC, auc_all_qda$aggr)
+   name<-append(name, "qda")
+  # number_of_cols<-append(n, n)
   
   #lda
   model_all_lda <- makeLearner("classif.lda", 
                                      predict.type = "prob")
   
-  auc_all_lda<-resample(model_all_lda, task, cv,measures=list(acc))
+  auc_all_lda<-resample(model_all_lda, task, cv,measures=list(auc))
   
   AUC<-append(AUC, auc_all_lda$aggr)
   name<-append(name, "lda")
-  number_of_cols<-append(n, n)
-  
+
   #naive Bayes
   model_all_nb <- makeLearner("classif.naiveBayes", 
                                     predict.type = "prob")
   
-  auc_all_nb<-resample(model_all_nb, task, cv,measures=list(acc))
+  auc_all_nb<-resample(model_all_nb, task, cv,measures=list(auc))
                           
   
   AUC<-append(AUC, auc_all_nb$aggr)
   name<-append(name, "nb")
-  number_of_cols<-append(n, n)
+
   
   
-  
-  A<-data.frame(AUC=AUC, Classifier=name, number_of_cols=number_of_cols)
-  
+  A<-data.frame(AUC=AUC, Classifier=name, number_of_cols=n)
   
   
+A  
 }
 
 score1<-give_me_AUC(heloc_no9)
