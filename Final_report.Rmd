@@ -583,10 +583,10 @@ Analizując dwa powyższe wykresy, z zależności auc od ilości cech wynika, ż
 
 #Tuning hiperparametrów
 
-Postanowiliśmy ztuningować parametry modelu randomForest jako że był najbardziej obiecujący. Użyliśmy następującej techniki zdefiniowaliśmy przestrzeń z której będziemy brali zestawy hiperparametrów jako
+Postanowiliśmy ztuningować parametry modelu randomForest jako że był najbardziej obiecujący. Użyliśmy następującej techniki zdefiniowaliśmy przestrzeń z której będziemy brali zestawy hiperparametrów jako: ntree od 100 do 1000, mtry od 10 do 50, nodesize od 1 do 50 co 5. Po czym wybraliśmy losowo 200 punktów z tej przestrzeni i wytrenowaliśmy tyleż modeli z danymi parametrami i wybraliśmy najlepszy. Ostateczne parametry to : bogdan wpisz tutaj
 
 # Wnioski 
 
-(i dyskusja)
+dac tu tabele o ktorej pisalem w issues
 
 # Bibiografia 
