@@ -18,9 +18,58 @@ knitr::opts_chunk$set(echo = TRUE)
 
 # Wstęp
 
-- problem
-- co będziemy robić 
-(następne punkty)
+
+Nasz projekt dotyczy tematu skoringu kredytowego. 
+Głównym zadaniem była ocena zdolności kredytowej klientów banku. Dane, które otrzymaliśmy zawierały następujące cechy :
+
+RiskPerformance <- target 
+
+ExternalRiskEstimate
+
+MSinceOldestTradeOpen
+
+MSinceMostRecentTradeOpen
+
+AverageMInFile
+
+NumSatisfactoryTrades
+
+NumTrades60Ever2DerogPubRec
+
+NumTrades90Ever2DerogPubRec
+
+PercentTradesNeverDelq
+
+MSinceMostRecentDelq
+
+MaxDelq2PublicRecLast12M
+
+MaxDelqEver
+
+NumTotalTrades
+
+NumTradesOpeninLast12M
+
+PercentInstallTrades
+
+MSinceMostRecentInqexcl7days
+
+NumInqLast6M
+
+NumInqLast6Mexcl7days
+
+NetFractionRevolvingBurden
+
+NetFractionInstallBurden
+
+NumRevolvingTradesWBalance
+
+NumInstallTradesWBalance
+
+NumBank2NatlTradesWHighUtilization
+
+PercentTradesWBalance
+
 
 # Cel
 
@@ -571,7 +620,9 @@ Ostatni dataset jaki stworzyliśmy, był w ramach eksperymentu. Chcieliśmy spra
 Kolejno zrobiliśmy wykres zależności AUC od ilości cech w zbiorze dla wyżej wymienionych klasyfikatorów, co oznacza, że sprawdzaliśmy ich wyniki na powyżej wymienionych datasetach oraz zbiorze pełnym .
 
 ![AUC(ilość cech)](auc_ok.png)
+
 A także wykreślno wykres krzywej ROC 
+
 ![Roc](roc_ok.png)
 
 
@@ -580,8 +631,9 @@ A także wykreślno wykres krzywej ROC
 
 Analizując dwa powyższe wykresy, z zależności auc od ilości cech wynika, że prawie w każdym przypadku random forest ma najlepsze wyniki . Na krzywej roc dostrzegamy jedynie różnice klasyfikatora rpart. 
 
+
 # Wnioski 
 
-(i dyskusja)
+Początkowo wyniki jakie otrzymywaliśmy tranując klasyfikator random forest na zbiorze pierwotnym, bez żadych modyffikacji to auc=0,77 . Po tuningu otrzymaliśmy wynik auc=0,799 .   Można uznać, że jest to zdecydowanie zadowalający rezultat. 
 
 # Bibiografia 
