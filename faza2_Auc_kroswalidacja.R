@@ -63,7 +63,7 @@ heloc_ok<-heloc_ok[-1]
 heloc_ok$MaxDelqEver<-factor(heloc_ok$MaxDelqEver)
 heloc_ok$MaxDelq2PublicRecLast12M<-factor(heloc_ok$MaxDelq2PublicRecLast12M)
 heloc_ok<-mlr::createDummyFeatures(heloc_ok)
-
+heloc_ok$RiskPerformance<-factor(heloc_ok$RiskPerformance)
 
 give_me_AUC<-function(train_set)
 {
@@ -124,20 +124,27 @@ A
 
 score1<-give_me_AUC(heloc_ok)
 
+score1$number_of_cols<-23
 
-heloc_notall<-subset(heloc_ok, select=c( "RiskPerformance", 
-                                         "MSinceOldestTradeOpen",  
-                                         "PercentTradesNeverDelq",  
+heloc_notall<-subset(heloc_ok, select=c( "RiskPerformance",
+                                         "MSinceOldestTradeOpen",
+                                         "PercentTradesNeverDelq",
                                          "MSinceMostRecentDelq" ,
-                                         "MaxDelq2PublicRecLast12M", 
-                                         "MaxDelqEver" ,
-                                         "NetFractionRevolvingBurden" , 
+                                      
+                                         "NetFractionRevolvingBurden" ,
                                          "NetFractionInstallBurden" ,
                                          "NumRevolvingTradesWBalance",
                                          "NumBank2NatlTradesWHighUtilization",
-                                         "PercentTradesWBalance"  ))
+                                         "PercentTradesWBalance","MaxDelq2PublicRecLast12M.0"  ,       "MaxDelq2PublicRecLast12M.1"  ,      
+                                          "MaxDelq2PublicRecLast12M.2"   ,      "MaxDelq2PublicRecLast12M.3"   ,      "MaxDelq2PublicRecLast12M.4"   ,     
+                                         "MaxDelq2PublicRecLast12M.5"  ,       "MaxDelq2PublicRecLast12M.6"    ,     "MaxDelq2PublicRecLast12M.7"  ,      
+                                          "MaxDelq2PublicRecLast12M.9"  ,       "MaxDelqEver.2"      ,                "MaxDelqEver.3"  ,                   
+                                          "MaxDelqEver.4"      ,                "MaxDelqEver.5"    ,                  "MaxDelqEver.6"    ,                
+                                          "MaxDelqEver.7"  ,                    "MaxDelqEver.8"      ))
 
 score2<-give_me_AUC(heloc_notall)
+
+score2$number_of_cols<-10
 
 heloc_notall2<-subset(heloc_ok, select=c( "RiskPerformance", 
                                            "MSinceOldestTradeOpen",  
@@ -150,13 +157,13 @@ heloc_notall2<-subset(heloc_ok, select=c( "RiskPerformance",
                                            "PercentTradesWBalance"  ))
 score3<-give_me_AUC(heloc_notall2)
 
+score3$number_of_cols<-8
 
-
-heloc_notall3<-heloc_ok[,-12]
-heloc_notall3<-heloc_notall3[,-11]
-
+heloc_notall3<-heloc_ok[1:22]
 
 score4<-give_me_AUC(heloc_notall3)
+
+score4$number_of_cols<-21
 
 heloc_notall4<-subset(heloc_ok, select=c( "RiskPerformance", 
                                            "ExternalRiskEstimate" , 
@@ -169,6 +176,8 @@ heloc_notall4<-subset(heloc_ok, select=c( "RiskPerformance",
                                            "PercentTradesWBalance"  ))
 score5<-give_me_AUC(heloc_notall4)
 
+score5$number_of_cols<-9
+
 heloc_notall5<-subset(heloc_ok, select=c( "RiskPerformance", 
                                            "ExternalRiskEstimate" , 
                                            "PercentTradesNeverDelq",  
@@ -176,7 +185,9 @@ heloc_notall5<-subset(heloc_ok, select=c( "RiskPerformance",
 
 score6<-give_me_AUC(heloc_notall5)
 
-AUC_all<-rbind(score1, score2, score3, score4, score5, score6)
+score6$number_of_cols<-3
+
+AUC_all<-rbind(score1,score2, score3, score4 ,score5, score6)
 max(AUC_all$AUC)
 
 
