@@ -512,10 +512,9 @@ Testowaliśmy następujące klasyfikatory:
 
 * svm
 * rpart
-* Ida
-* qda
+* gbm
 * rf
-* nb
+
 
 Inżynierie cech w naszym datasecie zaczeliśmy od podziału zbioru danych na "Bad" i "Good" klientów oraz analizę historgamów dla każdej z cech. W niektórych z nich zauważyliśmy znaczące róznice dla tych dwóch zbiorów. Uznaliśmy, że mogą być one podstawą do odpowiedniej klasyfikacji. Wybrane przez nas atrybuty to :
 
@@ -583,10 +582,9 @@ Analizując dwa powyższe wykresy, z zależności auc od ilości cech wynika, ż
 
 #Tuning hiperparametrów
 
-Postanowiliśmy ztuningować parametry modelu randomForest jako że był najbardziej obiecujący. Użyliśmy następującej techniki zdefiniowaliśmy przestrzeń z której będziemy brali zestawy hiperparametrów jako: ntree od 100 do 1000, mtry od 10 do 50, nodesize od 1 do 50 co 5. Po czym wybraliśmy losowo 200 punktów z tej przestrzeni i wytrenowaliśmy tyleż modeli z danymi parametrami i wybraliśmy najlepszy. Ostateczne parametry to : bogdan wpisz tutaj
+Postanowiliśmy ztuningować parametry modelu randomForest jako że był najbardziej obiecujący. Użyliśmy następującej techniki zdefiniowaliśmy przestrzeń z której będziemy brali zestawy hiperparametrów jako: ntree od 100 do 1000, mtry od 10 do 50, nodesize od 1 do 50 co 5. Po czym wybraliśmy losowo 200 punktów z tej przestrzeni i wytrenowaliśmy tyleż modeli z danymi parametrami i wybraliśmy najlepszy. Ostateczne parametry to : ntree=923; mtry=13; nodesize=36.
 
 # Wnioski 
 
-dac tu tabele o ktorej pisalem w issues
+Nasz model oparty o klasyfikator randomForest ma AUC na poziomie około 79.7% co uznajemy za sukces, zwłaszcza że zwycięscy konkursu osiągneli podobny wynik.
 
-# Bibiografia 

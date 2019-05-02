@@ -58,10 +58,13 @@ library(DataExplorer)
 
 
 
-heloc_no9<-read.csv("heloc_ok.csv")
+heloc_ok<-read_csv("heloc_ok.csv")
+heloc_ok<-heloc_ok[-1]
+heloc_ok$MaxDelqEver<-factor(heloc_ok$MaxDelqEver)
+heloc_ok$MaxDelq2PublicRecLast12M<-factor(heloc_ok$MaxDelq2PublicRecLast12M)
+heloc_ok<-mlr::createDummyFeatures(heloc_ok)
 
 
-heloc_no9
 give_me_AUC<-function(train_set)
 {
   
@@ -102,37 +105,16 @@ give_me_AUC<-function(train_set)
 
   AUC
   name
-  #qda
+  #gbm
   
-   model_all_qda <- makeLearner("classif.qda", 
+   model_all_qda <- makeLearner("classif.gbm", 
                                       predict.type = "prob")
   
    auc_all_qda<-resample(model_all_qda, task, cv,measures=list(auc))
   
    AUC<-append(AUC, auc_all_qda$aggr)
-   name<-append(name, "qda")
+   name<-append(name, "gbm")
   # number_of_cols<-append(n, n)
-  
-  #lda
-  model_all_lda <- makeLearner("classif.lda", 
-                                     predict.type = "prob")
-  
-  auc_all_lda<-resample(model_all_lda, task, cv,measures=list(auc))
-  
-  AUC<-append(AUC, auc_all_lda$aggr)
-  name<-append(name, "lda")
-
-  #naive Bayes
-  model_all_nb <- makeLearner("classif.naiveBayes", 
-                                    predict.type = "prob")
-  
-  auc_all_nb<-resample(model_all_nb, task, cv,measures=list(auc))
-                          
-  
-  AUC<-append(AUC, auc_all_nb$aggr)
-  name<-append(name, "nb")
-
-  
   
   A<-data.frame(AUC=AUC, Classifier=name, number_of_cols=n)
   
@@ -140,10 +122,10 @@ give_me_AUC<-function(train_set)
 A  
 }
 
-score1<-give_me_AUC(heloc_no9)
+score1<-give_me_AUC(heloc_ok)
 
 
-eloc_notall<-subset(heloc_no9, select=c( "RiskPerformance", 
+heloc_notall<-subset(heloc_ok, select=c( "RiskPerformance", 
                                          "MSinceOldestTradeOpen",  
                                          "PercentTradesNeverDelq",  
                                          "MSinceMostRecentDelq" ,
@@ -155,9 +137,9 @@ eloc_notall<-subset(heloc_no9, select=c( "RiskPerformance",
                                          "NumBank2NatlTradesWHighUtilization",
                                          "PercentTradesWBalance"  ))
 
-score2<-give_me_AUC(eloc_notall)
+score2<-give_me_AUC(heloc_notall)
 
-heloc_notall2<-subset(heloc_no9, select=c( "RiskPerformance", 
+heloc_notall2<-subset(heloc_ok, select=c( "RiskPerformance", 
                                            "MSinceOldestTradeOpen",  
                                            "PercentTradesNeverDelq",  
                                            "MSinceMostRecentDelq" ,
@@ -170,13 +152,13 @@ score3<-give_me_AUC(heloc_notall2)
 
 
 
-heloc_notall3<-heloc_no9[,-12]
+heloc_notall3<-heloc_ok[,-12]
 heloc_notall3<-heloc_notall3[,-11]
 
 
 score4<-give_me_AUC(heloc_notall3)
 
-heloc_notall4<-subset(heloc_no9, select=c( "RiskPerformance", 
+heloc_notall4<-subset(heloc_ok, select=c( "RiskPerformance", 
                                            "ExternalRiskEstimate" , 
                                            "PercentTradesNeverDelq",  
                                            "MSinceMostRecentDelq" ,
@@ -187,7 +169,7 @@ heloc_notall4<-subset(heloc_no9, select=c( "RiskPerformance",
                                            "PercentTradesWBalance"  ))
 score5<-give_me_AUC(heloc_notall4)
 
-heloc_notall5<-subset(heloc_no9, select=c( "RiskPerformance", 
+heloc_notall5<-subset(heloc_ok, select=c( "RiskPerformance", 
                                            "ExternalRiskEstimate" , 
                                            "PercentTradesNeverDelq",  
                                            "MSinceMostRecentDelq"))
@@ -202,7 +184,7 @@ max(AUC_all$AUC)
 ggplot(AUC_all, aes(x=AUC_all$number_of_cols, y=AUC_all$AUC, color=AUC_all$Classifier)) +
   geom_point(size=3)+
   scale_color_discrete(name="Classifier",
-                       labels=c("rf", "svm", "rpart", "qda", "lda", "nb"))+
+                       labels=c("rf", "svm", "rpart", "gbm"))+
   xlab("number of features")+
   ylab("AUC")+
   ylim(min(AUC_all$AUC)-0.05, max(AUC_all$AUC)+0.05)+
