@@ -1,74 +1,42 @@
 ---
-title: "Raport"
-author: "Olaf Werner"
+title: "Raport - projekt 1. WUM"
+author: "Olaf Werner, Joanna Gajewska, Bogdan Jastrzębski"
 date: "April 30, 2019"
 output: html_document
-toc: true
+html_document:
+  toc: true
+  number_sections: true
+  toc_float: true
+  theme: "paper"
 ---
+
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
+
 # Streszczenie
 
-- summary
-- wnioski 
-- mamy wyjaśnić czego dotyczy praca
+Niniejsza praca wyjaśnia szczegóły budowy modelu predykcji zdolności kredytowej kredytobiorców, zaproponowanego przez nas
+w ramach projektu z przedmiotu "Wstęp do uczenia maszynowego", prowadzonego w semestrze letnim 2019. 
+
+Dane udostępnione przez firmę FICO, które posłużyły nam za podstawę predykcji, są podsumowaniem historii kredytowej klientów banku.
+Całość zbioru liczącego sobie 23 cechy i ponad 10_000 rekordów oczyściliśmy, dokonaliśmy imputacji tam, gdzie wydawało się to konieczne,
+zmieniliśmy encoding zmiennych kategorycznych na "one-hot".
+
+W następnym kroku przetestowaliśmy szereg algorytmów klasyfikujących i wytypowaliśmy klasyfikator, który najlepiej radził sobie z 
+postawionym problemem - Random Forest. Na koniec znaleźliśmy parametry lasu losowego, które generowały najlepsze modele, metodą "random search".
+
+Zaproponowany przez nas klasyfikator osiąga skuteczność w okolicach 0.8 AUC (the area under the ROC curve)
 
 # Wstęp
 
+Ważną informacją dla banku udzielającego kredytu jest tzw. zdolność kredytowa potencjalnego klienta. Zanim bank udzieli kredytu,
+chciałby wiedzieć, jakie są szanse, że klient spłaci kredyt w wyznaczonym terminie. Wiedza taka jest w oczywisty sposób użyteczna z 
+biznesowegopunktu widzenia. 
 
-Nasz projekt dotyczy tematu skoringu kredytowego. 
-Głównym zadaniem była ocena zdolności kredytowej klientów banku. Dane, które otrzymaliśmy zawierały następujące cechy :
-
-RiskPerformance <- target 
-
-ExternalRiskEstimate
-
-MSinceOldestTradeOpen
-
-MSinceMostRecentTradeOpen
-
-AverageMInFile
-
-NumSatisfactoryTrades
-
-NumTrades60Ever2DerogPubRec
-
-NumTrades90Ever2DerogPubRec
-
-PercentTradesNeverDelq
-
-MSinceMostRecentDelq
-
-MaxDelq2PublicRecLast12M
-
-MaxDelqEver
-
-NumTotalTrades
-
-NumTradesOpeninLast12M
-
-PercentInstallTrades
-
-MSinceMostRecentInqexcl7days
-
-NumInqLast6M
-
-NumInqLast6Mexcl7days
-
-NetFractionRevolvingBurden
-
-NetFractionInstallBurden
-
-NumRevolvingTradesWBalance
-
-NumInstallTradesWBalance
-
-NumBank2NatlTradesWHighUtilization
-
-PercentTradesWBalance
+Prawdopodobnie istnieje pewna zależność pomiędzy historią kredytową klienta i tym, czy ten klient spłaci nowy kredyt w terminie. Potrzeba zbadania tego związku stanowi kamień węgielny naszego projektu. Potencjalnie zdolność kredytową można przewidywać na podstawie o wiele szerszego zbioru danych, tego jednak projekt, ani niniejsza praca nie dotyczy.
 
 
 # Cel
@@ -637,9 +605,5 @@ Postanowiliśmy ztuningować parametry modelu randomForest jako że był najbard
 
 # Wnioski 
 
-Początkowo wyniki jakie otrzymywaliśmy tranując klasyfikator random forest na zbiorze pierwotnym, bez żadych modyffikacji to auc=0,77 . Po tuningu otrzymaliśmy wynik auc=0,799 .   Można uznać, że jest to zdecydowanie zadowalający rezultat. 
-
-
-
-dac tu tabele o ktorej pisalem w issues
+Początkowo wyniki jakie otrzymywaliśmy tranując klasyfikator random forest na zbiorze pierwotnym, bez żadych modyffikacji to auc=0,77 . Po tuningu otrzymaliśmy wynik auc=0,798 . Można uznać, że jest to zdecydowanie zadowalający rezultat biorąc pod uwagę fakt że zwycięscy konkursu otrzymali podobny wynik. 
 
