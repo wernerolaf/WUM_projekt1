@@ -580,6 +580,11 @@ A także wykreślno wykres krzywej ROC
 
 Analizując dwa powyższe wykresy, z zależności auc od ilości cech wynika, że prawie w każdym przypadku random forest ma najlepsze wyniki . Na krzywej roc dostrzegamy jedynie różnice klasyfikatora rpart. 
 
+
+#Tuning hiperparametrów
+
+Postanowiliśmy ztuningować parametry modelu randomForest jako że był najbardziej obiecujący. Użyliśmy następującej techniki zdefiniowaliśmy przestrzeń z której będziemy brali zestawy hiperparametrów jako
+
 # Wnioski 
 
 (i dyskusja)
