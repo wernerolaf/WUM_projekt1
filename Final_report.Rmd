@@ -2,7 +2,7 @@
 title: "Raport - projekt 1. WUM"
 author: "Olaf Werner, Joanna Gajewska, Bogdan Jastrzębski"
 date: "April 30, 2019"
-output: html_document
+output: 
   html_document:
     toc: true
     number_sections: true
@@ -605,5 +605,5 @@ Postanowiliśmy ztuningować parametry modelu randomForest jako że był najbard
 
 # Wnioski 
 
-Początkowo wyniki jakie otrzymywaliśmy tranując klasyfikator random forest na zbiorze pierwotnym, bez żadych modyffikacji to auc=0,77 . Po tuningu otrzymaliśmy wynik auc=0,798 . Można uznać, że jest to zdecydowanie zadowalający rezultat biorąc pod uwagę fakt że zwycięscy konkursu otrzymali podobny wynik. 
+Początkowo wyniki jakie otrzymywaliśmy tranując klasyfikator random forest na zbiorze pierwotnym, bez żadych modyfikacji to auc=0.77 . Po tuningu otrzymaliśmy wynik auc=0.802 . Można uznać, że jest to zdecydowanie zadowalający rezultat biorąc pod uwagę fakt że zwycięscy konkursu otrzymali podobny wynik. 
 
